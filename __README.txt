@@ -4,7 +4,7 @@ A. VERSION
 
 The first stable release of WCND was the beta 0.1, released
 as a private developmental build in March 2020.
-The version of WCND contained in this folder is beta 0.6.2.5.
+The version of WCND contained in this folder is beta 0.6.5
 This means it is an experimental pre-release build intended
 only for developers on the project.
 
