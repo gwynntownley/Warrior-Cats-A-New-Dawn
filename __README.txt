@@ -59,17 +59,33 @@ D. DOCUMENTATION
 File Tree
 
 ..
-__README (WCND information)
-_exc 
-nav
--main
---menuMain()
-entity
--cat
--map
-data
--calc
--opt
---settings
---setTutorial()
--parse
+__README
+_exc
+round
+storage
+-action
+--select
+-data
+--clock
+--file
+--parse
+-entity
+--cat
+--clan
+--map
+--merchant
+--rank
+-event
+--battle
+--death
+--event
+--report
+-menu
+--bazaar
+--explore
+--main
+--meeting
+--play
+--social
+-view
+--allegiances
