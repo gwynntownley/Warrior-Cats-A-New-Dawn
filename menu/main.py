@@ -8,6 +8,7 @@ import pickle
 
 def menuMain():
 
+  from bin.text import mainText
   from data.clock import clock
   from data.file import filePreview
   from data.parse import parseOpt, parseSel, parseDesc
@@ -25,27 +26,9 @@ def menuMain():
   cmd = None
   
   while not cmd in ["N", "L"]:
-    print("""Welcome to:
+    print(mainText["title"])
 
-  ___   _       __                _                                                                  ___
- |     | |     / /___ ___________(_)___  _____                                                          |
-|      | | /| / / __ `/ ___/ ___/ / __ \/ ___/  adapted from original series by ERIN HUNTER              |
-|      | |/ |/ / /_/ / /  / /  / / /_/ / /       a FUNNYBUG STUDIOS project                              |
-|      |__/|__/\__,_/_/__/_/  /_/\____/_/     ___       _   __                ____                       |
-|                  / ____/___ _/ /_______    /   |     / | / /__ _      __   / __ \____ __      ______   |
-|                 / /   / __ `/ __/ ___(_)  / /| |    /  |/ / _ \ | /| / /  / / / / __ `/ | /| / / __ \  |
-|        BETA    / /___/ /_/ / /_(__  )    / ___ |   / /|  /  __/ |/ |/ /  / /_/ / /_/ /| |/ |/ / / / /  |
-|      0.6.5     \____/\__,_/\__/____(_)  /_/  |_|  /_/ |_/\___/|__/|__/  /_____/\__,_/ |__/|__/_/ /_/   |
- |___                                                                                                ___|                             """)
-
-    cmd = input("""
-    Please enter one of the commands below:
-
-    [N]ew Game
-
-    [L]oad Game
-    
-    > """).upper()
+    cmd = input(mainText["startCmd"]).upper()
 
   # begin new game
 
@@ -81,13 +64,13 @@ def menuMain():
     for i in range((random.randint(1, 3))):
       genCat("player_Clan", None)
 
-    input("You are the leader of a band of wandering cats. [press enter to continue]")
+    input(mainText["expoA"])
 
-    input("Thrust from your old home, you set out to lead a search for suitable land.")
+    input(mainText["expoB"])
 
-    input("But, days turned to moons, and unease to peril.")
+    input(mainText["expoC"])
 
-    input("For a long time, it seemed all hope was lost...")
+    input(mainText["expoD"])
 
     rando = (random.choice(list(clan.clans["player_Clan"].cats)))
 
@@ -96,7 +79,7 @@ def menuMain():
     while rando2 == rando:
       rando2 = (random.choice(list(clan.clans["player_Clan"].cats)))
 
-    input("Until %s, a(n) %s %s, sees something in the distance..!" % (clan.clans["player_Clan"].cats[rando].name, clan.clans["player_Clan"].cats[rando].build, clan.clans["player_Clan"].cats[rando].pronoun))
+    input(mainText["expoE"] % (clan.clans["player_Clan"].cats[rando].name, clan.clans["player_Clan"].cats[rando].build, clan.clans["player_Clan"].cats[rando].pronoun))
 
     cmd = False
 
@@ -105,22 +88,11 @@ def menuMain():
       notable, loc_y, location = spawn("player_Clan")
     
 
-      input("""
-      "There!" cries %s. "A(n) %s. That's where our new home ought to be."
-      """ % (clan.clans["player_Clan"].cats[rando].name, land.coordinates[loc_y][location].biome))
+      input(mainText["landFound"] % (clan.clans["player_Clan"].cats[rando].name, land.coordinates[loc_y][location].biome))
 
-      cmd = input("""
-      "A %s, %s.." comments %s, a(n) %s %s. "Are we sure that's right for us?"
-
-      %s and %s both turn to look at you. What do you say?
-
-      [Y]es, I like that. Our new home will be a(n) %s %s
-
-      [N]o, let's keep looking.
-
-      > """ %(land.coordinates[loc_y][location].biome, notable, clan.clans["player_Clan"].cats[rando2].name, clan.clans["player_Clan"].cats[rando2].coat,
+      cmd = input(mainText["landChoice"] % (land.coordinates[loc_y][location].biome, notable, clan.clans["player_Clan"].cats[rando2].name, clan.clans["player_Clan"].cats[rando2].coat,
             clan.clans["player_Clan"].cats[rando2].pronoun, clan.clans["player_Clan"].cats[rando].name, clan.clans["player_Clan"].cats[rando2].name,
-              land.coordinates[loc_y][location].biome, notable)).upper()
+            land.coordinates[loc_y][location].biome, notable)).upper()
 
       if cmd == "Y":
         cmd = True
@@ -132,7 +104,7 @@ def menuMain():
         if [loc_y, location] in clan.clans["player_Clan"].location:
           clan.clans["player_Clan"].location.remove([loc_y, location])
 
-        input("You reject %s, and opt to continue the search." % clan.clans["player_Clan"].cats[rando].name)
+        input(mainText["landVeto"] % clan.clans["player_Clan"].cats[rando].name)
 
         rando = (random.choice(list(clan.clans["player_Clan"].cats)))
 
@@ -141,47 +113,19 @@ def menuMain():
         while rando2 == rando:
           rando2 = (random.choice(list(clan.clans["player_Clan"].cats)))
 
-    input("""
-
-=!= Alert =!=
-
-Congratulations! You have made your first decision as leader.
-
-You will have to make many of these throughout your time managing
-your band of cats, though many of them can be overturned later
-if you find yourself unhappy with your decision.
-
-Other cats have their own ideas on how things ought to be run,
-so if you find yourself unable to decide, seeking counsel is
-always an option.
-
-= = = = = = =
-    """)
+    input(mainText["guideA"])
 
     # Clan spawn
 
-    print("Your new home is a/n %s, %s" % (land.coordinates[loc_y][location].biome, notable))
+    print(mainText["landApprove"] % (land.coordinates[loc_y][location].biome, notable))
 
     if not land.coordinates[loc_y][location].landmark == None:
-      print("Your camp contains a(n) %s." % land.coordinates[loc_y][location].landmark)
+      print(mainText["landMark"] % land.coordinates[loc_y][location].landmark)
 
     #  Clan name
-    clan.clans["player_Clan"].noun = input(
-  """
-  You traveled here a loose group, but now that you have a home, it only makes sense
-  to organise. What kind of faction would you like to lead? You can be a Clan, a Tribe,
-  or something else entirely. Reply with the noun you would like your group to
-  be referred to.
-    
-  > """)
+    clan.clans["player_Clan"].noun = input(mainText["factionType"])
 
-    clan.clans["player_Clan"].name = input(
-  """
-  Now that your %s has survived the journey here, it would only be fitting to give them a name.
-  Please enter it below.
-  You will have opportunities to change it later.
-    
-  > """ % clan.clans["player_Clan"].noun)
+    clan.clans["player_Clan"].name = input(mainText["factionName"] % clan.clans["player_Clan"].noun)
     
     land.coordinates[loc_y][location].name = "%s camp" % clan.clans["player_Clan"].name
     land.coordinates[loc_y][location].owner = "player_Clan"
@@ -189,22 +133,11 @@ always an option.
 
     parseOpt(symbols)
 
-    clan.clans["player_Clan"].symbol = parseSel(symbols,
-  """
-  %s must be unique from all the others, and
-  an official symbol can help you really make your mark. Please enter the ID
-  of the icon you would like to use as %s's symbol.
-          
-  > """ % (clan.clans["player_Clan"].name, clan.clans["player_Clan"].name))
+    clan.clans["player_Clan"].symbol = parseSel(symbols, mainText["factionIcon"] % (clan.clans["player_Clan"].name, clan.clans["player_Clan"].name))
 
     # Clan motto
 
-    clan.clans["player_Clan"].motto = input(
-  """
-  Finally, no great faction's complete without a motto expousing
-  its virtues! What is a motto all your cats can cry on the battlefield?
-        
-  > """)
+    clan.clans["player_Clan"].motto = input(mainText["factionMotto"])
 
     # Cleanup
 
@@ -215,37 +148,13 @@ always an option.
 
     # Leader customization
 
-    print("")
-    print("=== CREATE YOUR LEADER ===")
-    print("")
-
-    print("Now, about you, leader of the great %s..." % clan.clans["player_Clan"].name)
-    print("Before you can receive your nine lives from StarClan, they need to know more about you. This is important, so take your time. Firstly...")
+    print(mainText["leaderIntroA"] % clan.clans["player_Clan"].name)
+    print(mainText["leaderIntroB"])
 
     tried = False
     while tried == False:
       try:
-        name = input(
-      """
-      Names in A New Dawn follow a prefix-root-suffix rule. To enter your name, enter using this syntax,
-      so the different parts of your name are stored separately: prefix/root/suffix
-
-      The root is absolutely required, but the prefix/suffix are not. To not include them,
-      simply leave the form blank. Here are some examples of this syntax :
-
-      root only
-      /Scourge/
-      root + suffix
-      /Fire/star
-      prefix + root + suffix
-      General /Wound/wort
-      prefix + root
-      Captain /Holly/
-      
-      With that out of the way ...
-      What do you call yourself, great leader?
-        
-      > """)
+        name = input(mainText["leaderName"])
 
         name = name.split("/")
         prefix = name[0]
@@ -260,15 +169,7 @@ always an option.
 
     cmd = "alfalfa"
     while not cmd in ["t", "s", "c"]:
-      cmd = input(
-  """
-  A few more questions, if you don't mind--
-  Wat do you consider yourself to be, gender-wise ?
-    [T]om
-    [S]he-cat
-    [C]at
-      
-  > """).lower()
+      cmd = input(mainText["leaderGender"]).lower()
 
     if "t" in cmd:
       pronoun = "tom"
@@ -277,68 +178,39 @@ always an option.
     else:
       pronoun = "cat"
     
-    print(
-  """
-  Pelt colour in A New Dawn is split into two parts : the base and the pattern.
-  If, say, you are a tortoiseshell cat, your base would be 'ginger' and your pattern would be ' with black patches'. 
-  While this will be entered like 'ginger with black patches', it will be stored as 'tortoiseshell'.
-  Likewise, if you are a brown tabby, your base would be 'brown' and your pattern would be ' tabby'.""")
+    print(mainText["leaderCoatA"])
     
     print("Coat Base : ")
 
     parseOpt(cat.coats)
 
-    coat = parseSel(cat.coats,
-  """
-  Please select the base of your coat, from the options above.
-        
-  > """)
+    coat = parseSel(cat.coats, mainText["leaderCoatB"])
     
     print("Coat Pattern : ")
 
     parseOpt(cat.patterns)
 
-    pattern = parseSel(cat.patterns,
-  """
-  Please select your coat's pattern, from the options above.
-  If you don't have a coat pattern, select one of the blank fields.
-  ( there are multiple blank fields - the one you pick makes no difference )
-        
-  > """)
+    pattern = parseSel(cat.patterns, mainText["leaderPattern"])
   
     print("Eye Colours : ")
 
     parseOpt(cat.eyes)
 
-    eye = parseSel(cat.eyes,
-  """
-  Please select your eye colour, from the options above.
-        
-  > """)
+    eye = parseSel(cat.eyes, mainText["leaderEyes"])
 
     print("Physical Traits : ")
 
     parseOpt(cat.builds)
 
-    build = parseSel(cat.builds,
-  """
-  Please select a physical trait that describes you, from the options above.
-        
-  > """)
+    build = parseSel(cat.builds, mainText["leaderBuild"])
 
-    print("Personality Traits :")
+    print("Personality Traits : ")
     
     parseOpt(traits)
 
-    trait_a = parseSel(traits,
-  """
-  Please select a personality trait that describes you, from the options above.
-        
-  > """)
+    trait_a = parseSel(traits, mainText["leaderTrait"])
     
-    quote = input("""Final thing! What's a quote that you believe encompasses you, as a leader?
-    
-    > """)
+    quote = input(mainText["leaderQuote"])
     
     description = parseDesc(coat, pattern, pronoun, build, eye)
 
@@ -352,7 +224,7 @@ always an option.
     10, 1, 0, {"Willpower" : 10, "Strength" : 2, "Toughness" : 2, "Speed" : 2, "Precision" : 2, "Charisma" : 2}, [],
     clan.clans["player_Clan"].name, "Neutral", "%s camp" % clan.clans["player_Clan"].name)
 
-    print("Welcome to A New Dawn, %s of %s! May you have many great adventures in the vast wilderness." %
+    print(mainText["welcome"] %
           (clan.clans["player_Clan"].cats["leader"].name, clan.clans["player_Clan"].name))
 
     for c in list(clan.clans["player_Clan"].cats).copy():
@@ -360,26 +232,20 @@ always an option.
 
     # Part Two: Generate the other Factions
 
-    input("You are not alone in the wilderness. [press enter]")
-    input("The nearby factions have come to introduce themselves.")
+    input(mainText["othersA"])
+    input(mainText["othersB"])
 
     for i in range((random.randint(1, 5))):
       genClan()
 
     if len(list(clan.clans)) == 1:
-      input("ERROR DURING FACTION GENERATION. Sending you back to the main menu... [press enter to accept]")
+      input(mainText["genError"])
       mainMenu()
 
     for i in range(3):
       genMer()
 
-    print("""===CUTSCENE===
-    
-    The first task of a new leader is receiving their nine lives.
-    
-    At the %s, you gain the following lives: 
-    
-    """ % land.communer)
+    print(mainText["lifeScene"] % land.communer)
 
     setattr(clan.clans["player_Clan"].cats["leader"], 'lives', 9)
 
@@ -422,18 +288,16 @@ always an option.
 
       virtue = (random.choice(virtues))
 
-      print("From %s, your %s, the gift of %s." % (name, relation, virtue))
+      print(mainText["lifeGift"] % (name, relation, virtue))
 
     print("")
-    print("===END OF CUTSCENE===")
+    print(mainText["lifeEnd"])
 
     menuPlay(clock, symbols)
 
   elif cmd == "L":
 
-    print("""
-    Enter the ID of the file you would like to load.
-    """)
+    print(mainText["load"])
 
     filePreview((clan.clans, disease.diseases,
     land.communer, land.coordinates, clock,
@@ -450,7 +314,7 @@ always an option.
       possibleCode,
       warriorCode, symbols) = pickle.load(file)
 
-    input("Press enter when you're ready.")
+    input(mainText["cont"])
     
     menuPlay(clock, symbols)
 
