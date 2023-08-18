@@ -1,3 +1,49 @@
+### ACTION/SELECT
+
+selectText = {
+
+  "focus" : """
+    What should the focus of this patrol be?
+
+    [1] Surveying the area and keeping an eye on things. (no change)
+
+    [2] Finding potential recruits. (increased chance of finding recruits)
+
+    [3] Gathering herbs. (increased chance of discovering herbs--only works if territory includes "Flower Field")
+
+    [4] Collecting odd trinkets and den-building material. (increased chance of finding new items--only works if territory includes at least one landmark)
+
+    [5] Securing the borders and keeping neighbouring enemies out. (increased chance of enemy encounter)
+
+    > """,
+
+  "catInfo" : "%d: %s (LVL %d, %d/%d WP)",
+
+  "catsNone" : "You have no more cats eligible for a(n) %s!",
+
+  "leaderAdd" : """
+              Attention! You are trying to add yourself to this %s. Because you will be away,
+              your turns for the duration of the %s will automatically be skipped. Would you still
+              like to go? [Y/N]
+
+              > """,
+
+  "capAdd" : """First, you must assign a patrol CAPTAIN to lead the %s. Enter their ID below.
+            
+            > """,
+
+  "catAdd" : """To assign a cat to this %s, enter their ID. To send the %s as is, say DONE.
+            
+            > """,
+
+  "sent" : "You sent some of your cats %s! Wish them well!",
+
+  
+  
+}
+
+### MENU/MAIN
+
 mainText = {
   
   "title" : """Welcome to:
