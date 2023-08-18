@@ -42,6 +42,66 @@ selectText = {
   
 }
 
+### DATA/CLOCK
+
+clockText = {
+
+  "invadeCat" : "Cats from %s have invaded your camp!",
+
+  "invadePred" : "Predators have discovered your camp!",
+
+  "return" : "%s and their patrol have returned!",
+
+  "xpGain" : "%s gained %d xp.",
+
+  "landClaim" : "They have claimed new land for %s! Now you will catch more prey when you hunt, and you can recruit more cats.",
+
+  "landType" : "This land is a %s.",
+
+  "landMark" : "This new land also included a landmark: %s!",
+
+  "landFail" : "Unfortunately, the mission was unsuccessful - they found themselves unable to claim the chosen territory for their own.",
+
+  "huntReturn" : "The hunting patrol led by %s has returned!",
+
+  "huntCatch" : "%s has caught a(n) %s for %d feedings and gained %d xp.",
+
+  "huntWP" : "%s lost %d WP in the process.",
+
+  "huntFail" : "Your cats couldn't find anything to catch. The prey might have gone somewhere else...",
+
+  "trainReturn" : "The training session taught by %s has finished!",
+
+  "trainXP" : "%s gained %d fighting xp from training.",
+
+  "trainWP" : "%s lost %d WP in the process.",
+
+  "borderReturn" : "The border patrol led by %s has returned!",
+
+  "borderPrey" : "%s came back with a(n) %s worth %d feedings.",
+
+  "borderItem" : "%s found a(n) %s while exploring. It has been added to the Clan's inventory.",
+
+  "borderHurt" : "%s got injured during the patrol.",
+
+  "borderWP" : "%s lost %d WP.",
+
+  "borderXP" : "%s has earned %d experience points from this patrol.",
+
+  "preyGreat" : "The patrol noticed that prey was running especially well here.",
+
+  "preyGood" : "The patrol found plenty of good hunting spots in that part of the territory.",
+
+  "preyPoor" : "The patrol found hunting in the area to be poor, though there were still some prey about.",
+
+  "preyBare" : "The patrol noticed this territory was almost completely bare of prey. Hunting there would be a waste of time.",
+
+  "famine" : "They also found signs of famine in the area--the hunting here may begin to suffer.",
+
+  "growth" : "This part of the territory is showing signs of growth and prosperity. If it continues to thrive like this, the hunting conditions may improve."
+
+}
+
 ### MENU/MAIN
 
 mainText = {
