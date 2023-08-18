@@ -1,3 +1,4 @@
+from bin.text import selectText
 from data.clock import clock
 from entity.clan import clan
 from entity.map import seeMap
@@ -58,20 +59,7 @@ def actionSelect(action):
   # if patrol is a border patrol, the player may assign a "focus" to guide the results
   if action == "patrol":
 
-    cmd = input("""
-    What should the focus of this patrol be?
-
-    [1] Surveying the area and keeping an eye on things. (no change)
-
-    [2] Finding potential recruits. (increased chance of finding recruits)
-
-    [3] Gathering herbs. (increased chance of discovering herbs--only works if territory includes "Flower Field")
-
-    [4] Collecting odd trinkets and den-building material. (increased chance of finding new items--only works if territory includes at least one landmark)
-
-    [5] Securing the borders and keeping neighbouring enemies out. (increased chance of enemy encounter)
-
-    > """)
+    cmd = input(selectText["focus"])
 
     action = "patrol" + cmd
 
@@ -89,13 +77,13 @@ def actionSelect(action):
       if ((clan.clans["player_Clan"].ranks[clan.clans["player_Clan"].cats[i].rank].privs["can%s" % action.capitalize()]) and (("%s camp" % clan.clans["player_Clan"].name) in clan.clans["player_Clan"].cats[i].loc)
       and not (i == leader and action == "claim")):
         # display the cat's selection number, name, level, and WP; append to possibles list
-        print("%d: %s (LVL %d, %d/%d WP)" % (cnt, clan.clans["player_Clan"].cats[i].name, clan.clans["player_Clan"].cats[i].lvl, clan.clans["player_Clan"].cats[i].wp, clan.clans["player_Clan"].cats[i].stats["Willpower"]))
+        print(selectText["catInfo"] % (cnt, clan.clans["player_Clan"].cats[i].name, clan.clans["player_Clan"].cats[i].lvl, clan.clans["player_Clan"].cats[i].wp, clan.clans["player_Clan"].cats[i].stats["Willpower"]))
         possibles.append(i)
         cnt += 1
 
     # if no remaining cats are available...
     if cnt == 1:
-      print("You have no more cats eligible for a(n) %s!" % keywords[0])
+      print(selectText["catsNone"] % keywords[0])
       done = True
       if choseCap == True:
         # if a captain has been selected, send patrol
@@ -116,12 +104,7 @@ def actionSelect(action):
             confirmAddition = False
             if target == leader:
 
-              confirmAddition = input("""
-              Attention! You are trying to add yourself to this %s. Because you will be away,
-              your turns for the duration of the %s will automatically be skipped. Would you still
-              like to go? [Y/N]
-
-              > """ % (keywords[0], keywords[0])).lower()
+              confirmAddition = input(selectText["leaderAdd"] % (keywords[0], keywords[0])).lower()
 
               if confirmAddition == "y":
                 confirmAddition = True
@@ -143,18 +126,14 @@ def actionSelect(action):
           correct_confirm = True
         except Exception as e:
           if choseCap == False:
-            cmd = input("""First, you must assign a patrol CAPTAIN to lead the %s. Enter their ID below.
-            
-            > """ % keywords[1])
+            cmd = input(selectText["capAdd"] % keywords[1])
           else:
-            cmd = input("""To assign a cat to this %s, enter their ID. To send the %s as is, say DONE.
-            
-            > """ % (keywords[1], keywords[0]))
+            cmd = input(selectText["catAdd"] % (keywords[1], keywords[0]))
 
   if failed == False:
     y, target = seeMap("patrol")
 
-    print("You sent some of your cats %s! Wish them well!" % keywords[2])
+    print(selectText["sent"] % keywords[2])
 
     print("Captain : %s" % captain)
     print("Action : %s" % action)
