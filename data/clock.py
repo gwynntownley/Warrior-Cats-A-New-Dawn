@@ -1,3 +1,4 @@
+from bin.text import clockText
 from event.battle import battle
 from entity.clan import clan
 from entity.map import land, landmarks
@@ -38,13 +39,13 @@ def timer():
       campX = list(land.coordinates[campY]).index(list(clan.clans["player_Clan"].location)[0][1])
       battleType = "enemy-n/a-%s-%s" % (campY, campX)
       battler = (random.choice(enemies))
-      print("Cats from %s have invaded your camp!" % battler)
+      print(clockText["invadeCat"] % battler)
     else:
       campY = list(clan.clans["player_Clan"].location)[0][0]
       campX = list(clan.clans["player_Clan"].location)[0][1]
       battleType = "predator-n/a-%s-%s" % (campY, campX)
       battler = None
-      print("Predators have discovered your camp!")
+      print(clockText["invadePred"])
 
     won = battle(battleType, battler)
 
@@ -117,14 +118,14 @@ def returnClaim(parse):
 
   capName = clan.clans["player_Clan"].cats[captain].name
   
-  print("%s and their patrol have returned!" % capName)
+  print(clockText["return"] % capName)
 
   for c in clan.clans["player_Clan"].cats.copy():
     if capName in clan.clans["player_Clan"].cats[c].loc or c == captain:
       clan.clans["player_Clan"].cats[c].loc = "%s camp" % clan.clans["player_Clan"].name
       ranxp = (random.randint(1, 5)) * 2
       clan.clans["player_Clan"].cats[c].xp += ranxp
-      print("%s gained %d xp." % (clan.clans["player_Clan"].cats[c].name, ranxp))
+      print(clockText["xpGain"] % (clan.clans["player_Clan"].cats[c].name, ranxp))
 
   # claim chosen territory
 
@@ -139,20 +140,20 @@ def returnClaim(parse):
       
   if claimed == True:
     land.coordinates[claimy][claimx].owner = "player_Clan"
-    print("They have claimed new land for %s! Now you will catch more prey when you hunt, and you can recruit more cats." % clan.clans["player_Clan"].name)
+    print(clockText["landClaim"] % clan.clans["player_Clan"].name)
     
-    print('This land is a %s.' % land.coordinates[claimy][claimx].biome)
+    print(clockText["landType"] % land.coordinates[claimy][claimx].biome)
     clan.clans["player_Clan"].location.append([claimy, claimx])
     
     if not land.coordinates[claimy][claimx].landmark == None:
-      print("This new land also included a landmark: %s!" % land.coordinates[claimy][claimx].landmark)
+      print(clockText["landMark"] % land.coordinates[claimy][claimx].landmark)
       if land.coordinates[claimy][claimx].landmark in clan.clans["player_Clan"].landmark:
         clan.clans["player_Clan"].landmark[land.coordinates[claimy][claimx].landmark] += 1
       else:
         clan.clans["player_Clan"].landmark[land.coordinates[claimy][claimx].landmark] = 1
       
   else:
-    print("Unfortunately, the mission was unsuccessful - they found themselves unable to claim the chosen territory for their own.")
+    print(clockText["landFail"])
 
   del clock[toDel]
 
@@ -175,7 +176,7 @@ def returnHunt(parse):
 
   capName = clan.clans["player_Clan"].cats[captain].name
   
-  print("The hunting patrol led by %s has returned!" % capName)
+  print(clockText["huntReturn"] % capName)
   # Get prey
 
   total = 0
@@ -198,18 +199,18 @@ def returnHunt(parse):
           newPrey = 5
         land.coordinates[locY][location].prey[caughtPrey] -= 1
 
-        print("%s has caught a(n) %s for %d feedings and gained %d xp." % (clan.clans["player_Clan"].cats[c].name,
+        print(clockText["huntCatch"] % (clan.clans["player_Clan"].cats[c].name,
                                                                            caughtPrey, newPrey, increase_factor))
       clan.clans["player_Clan"].cats[c].xp += increase_factor
       if hurt > 0:
-        print("%s lost %d WP in the process." % (clan.clans["player_Clan"].cats[c].name, hurt))
+        print(clockText["huntWP"] % (clan.clans["player_Clan"].cats[c].name, hurt))
         clan.clans["player_Clan"].cats[c].wp -= hurt
       clan.clans["player_Clan"].cats[c].loc = "%s camp" % clan.clans["player_Clan"].name
       total += newPrey
       print("preytotal: %d" % total)
   clan.clans["player_Clan"].prey += total
   if total == 0:
-    print("Your cats couldn't find anything to catch. The prey might have gone somewhere else...")
+    print(clockText["huntFail"])
 
   del clock[toDel]
 
@@ -231,7 +232,7 @@ def returnTrain(parse):
 
   capName = clan.clans["player_Clan"].cats[captain].name
   
-  print("The training session taught by %s has finished!" % capName)
+  print(clockText["trainReturn"] % capName)
 
   for c in clan.clans["player_Clan"].cats.copy():
     if capName in clan.clans["player_Clan"].cats[c].loc or captain == c:
@@ -246,10 +247,10 @@ def returnTrain(parse):
         hurt = (random.randint(1, 4))
       else:
         hurt = (random.randint(-3, 3))
-      print("%s gained %d fighting xp from training." % (clan.clans["player_Clan"].cats[c].name, total))
+      print(clockText["trainXP"] % (clan.clans["player_Clan"].cats[c].name, total))
       clan.clans["player_Clan"].cats[c].xp += total
       if hurt > 0:
-        print("%s lost %d WP in the process." % (clan.clans["player_Clan"].cats[c].name, hurt))
+        print(clockText["trainWP"] % (clan.clans["player_Clan"].cats[c].name, hurt))
         clan.clans["player_Clan"].cats[c].wp -= hurt
       clan.clans["player_Clan"].cats[c].loc = "%s camp" % clan.clans["player_Clan"].name
 
@@ -268,7 +269,7 @@ def returnBorder(parse):
   y = int(parse[2])
   target = parse[3]
   
-  print("The border patrol led by %s has returned!" % capName)
+  print(clockText["borderReturn"] % capName)
 
   # calculate returns
 
@@ -298,7 +299,7 @@ def returnBorder(parse):
             newPrey = 5
           land.coordinates[y][target].prey[caughtPrey] -= 1
 
-          print("%s came back with a(n) %s worth %d feedings." % (clan.clans["player_Clan"].cats[c].name,
+          print(clockText["borderPrey"] % (clan.clans["player_Clan"].cats[c].name,
                                                                              caughtPrey, newPrey,))
           totalPrey += newPrey
       totalExp += 1
@@ -309,7 +310,7 @@ def returnBorder(parse):
       if foundItem == 1 and (len(list(clan.clans["player_Clan"].landmark)) > 0):
         markVisited = (random.choice(list(clan.clans["player_Clan"].landmark)))
         newItem = random.choice(landmarks[markVisited])
-        print("%s found a(n) %s while exploring. It has been added to the Clan's inventory." % (clan.clans["player_Clan"].cats[c].name, newItem))
+        print(clockText["borderItem"] % (clan.clans["player_Clan"].cats[c].name, newItem))
         if newItem in clan.clans["player_Clan"].inv:
           clan.clans["player_Clan"].inv[newItem] += 1
         else:
@@ -362,15 +363,15 @@ def returnBorder(parse):
         # Found hurt?
         foundHurt = (random.randint(1, 3))
         if foundHurt == 1:
-          print("%s got injured during the patrol." % clan.clans["player_Clan"].cats[c].name)
+          print(clockText["borderHurt"] % clan.clans["player_Clan"].cats[c].name)
           injury = (random.randint(1, 5))
-          print("%s lost %d WP." % (clan.clans["player_Clan"].cats[c].name, injury))
+          print(clockText["borderWP"] % (clan.clans["player_Clan"].cats[c].name, injury))
           clan.clans["player_Clan"].cats[c].wp -= injury
           totalExp += 1
 
         clan.clans["player_Clan"].cats[c].xp += totalExp
 
-        print("%s has earned %d experience points from this patrol." % (clan.clans["player_Clan"].cats[c].name, totalExp))
+        print(clockText["borderXP"] % (clan.clans["player_Clan"].cats[c].name, totalExp))
 
         clan.clans["player_Clan"].cats[c].loc = "%s camp" % clan.clans["player_Clan"].name
 
@@ -379,19 +380,19 @@ def returnBorder(parse):
     preyTotal += land.coordinates[y][target].prey[p]
 
   if preyTotal > 24:
-    print("The patrol noticed that prey was running especially well here.")
+    print(clockText["preyGreat"])
   elif preyTotal > 12:
-    print("The patrol found plenty of good hunting spots in that part of the territory.")
+    print(clockText["preyGood"])
   elif preyTotal > 6:
-    print("The patrol found hunting in the area to be poor, though there were still some prey about.")
+    print(clockText["preyPoor"])
   else:
-    print("The patrol noticed this territory was almost completely bare of prey. Hunting there would be a waste of time.")
+    print(clockText["preyBare"])
 
   if hasattr(land.coordinates[y][target], 'status'):
     if land.coordinates[y][target] == "famine":
-      print("They also found signs of famine in the area--the hunting here may begin to suffer.")
+      print(clockText["famine"])
     else:
-      print("This part of the territory is showing signs of growth and prosperity. If it continues to thrive like this, the hunting conditions may improve.")
+      print(clockText["growth"])
   
         
   clan.clans["player_Clan"].prey += totalPrey
