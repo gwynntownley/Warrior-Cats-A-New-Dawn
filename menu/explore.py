@@ -264,8 +264,8 @@ def menuExplore(turns):
             else:
               clan.clans["player_Clan"].prey -= 20
               cmd = "alfalfa"
-              correct_confirm = False
-              while correct_confirm == False:
+              conf = False
+              while conf == False:
                 id = 1
                 for i in clan.clans["player_Clan"].cats.copy():
                   print("""
@@ -279,7 +279,7 @@ def menuExplore(turns):
                   id += 1
                 try:
                   target = list(clan.clans["player_Clan"].cats)[int(cmd) - 1]
-                  correct_confirm = True
+                  conf = True
                 except:
                   cmd = input("""
                   [Eddie] : "Oh, excellent! Who's gonna be the benefactor of my services? Please enter their ID listed above."
@@ -365,9 +365,9 @@ def menuExplore(turns):
               [Eddie] : "Sorry, my-buddy-my-pal, but it appears you're a bit poor on the prey end. Come back when you have more, uh-huh?" """)
             else:
               clan.clans["player_Clan"].prey -= 75
-              correct_confirm = False
+              conf = False
               cmd = "alfalfa"
-              while correct_confirm == False:
+              while conf == False:
                 id = 1
                 for i in clan.clans["player_Clan"].cats.copy():
                   print("""
@@ -383,7 +383,7 @@ def menuExplore(turns):
                   id += 1
                 try:
                   target = list(clan.clans["player_Clan"].cats)[int(cmd) - 1]
-                  correct_confirm = True
+                  conf = True
                 except:
                   cmd = input("""
                   [Eddie] : "Oh, excellent! Who's gonna be the benefactor of my services? Please enter their ID listed above."
@@ -399,8 +399,8 @@ def menuExplore(turns):
               points = clan.clans["player_Clan"].cats[target].lvl * 5
               while points > 0:
                 cmd = "alfalfa"
-                correct_confirm = False
-                while correct_confirm == False:
+                conf = False
+                while conf == False:
                   try:
                     if int(cmd) == 1:
                       clan.clans["player_Clan"].cats[i].stats["Willpower"] += 5
@@ -421,7 +421,7 @@ def menuExplore(turns):
                       clan.clans["player_Clan"].cats[i].stats["Charisma"] += 1
                       print("CHA has been increased by 1.")
                     points -= 1
-                    correct_confirm = True
+                    conf = True
                   except:
                     cmd = input("""
                     =%s's Stats [LVL %d (%d xp)]=
@@ -478,8 +478,8 @@ def menuExplore(turns):
           cmd = cmd.upper()
         if cmd == "Y":
           amt = "alfalfa"
-          correct_confirm = False
-          while correct_confirm == False:
+          conf = False
+          while conf == False:
             try:
               if (price * int(amt)) > clan.clans["player_Clan"].prey:
                 print("""
@@ -489,7 +489,7 @@ def menuExplore(turns):
                 clan.clans["player_Clan"].herbs += int(amt)
                 print("""
                 [Jay] : "Here ya go. Have a day." """)
-              correct_confirm = True
+              conf = True
             except:
               amt = input("""
               [Jay] : "How many herbs we talkin' here? Don't worry about stock, I can get more in a flash if you order more than I got on me." 
@@ -540,7 +540,7 @@ def menuExplore(turns):
           # Set action
 
           if cmd == "E":
-            correct_confirm = True
+            conf = True
             action = "exit"
           elif cmd == "W":
             action = "withdraw"
@@ -548,14 +548,14 @@ def menuExplore(turns):
             action = "deposit"
               
           cmd = "alfalfa"
-          correct_confirm = False
+          conf = False
 
           # Select
 
-          while correct_confirm == False:
+          while conf == False:
             try:
               target = list(folder.folders["bank"].contents)[int(cmd)]
-              correct_confirm = True
+              conf = True
             except:
               cmd = input("""
 
@@ -568,8 +568,8 @@ def menuExplore(turns):
           if action == "withdraw":
             if folder.folders["bank"].contents[target] > 0:
               amt = "alfalfa"
-              correct_confirm = False
-              while correct_confirm == False:
+              conf = False
+              while conf == False:
                 try: 
                   if int(amt) > folder.folders["bank"].contents[target]:
                     amt = folder.folders["bank"].contents[target]
@@ -590,7 +590,7 @@ def menuExplore(turns):
 
                     print("""[Liz] : "...enjoy your %d %s... have a good day." """ % (amt, target))
                   
-                  correct_confirm = True
+                  conf = True
                   purchased = True
 
                 except:
@@ -608,8 +608,8 @@ def menuExplore(turns):
           elif action == "deposit":
             if folder.folders["bank"].contents[target] == limit:
               amt = "alfalfa"
-              correct_confirm = False
-              while correct_confirm == False:
+              conf = False
+              while conf == False:
                 try: 
                   if int(amt) > limit:
                     amt = folder.folders["bank"].contents[target]
@@ -631,7 +631,7 @@ def menuExplore(turns):
 
                     print("""[Liz] : "...%d %s has been deposited... have a good day." """ % (amt, target))
                   
-                  correct_confirm = True
+                  conf = True
                   purchased = True
 
                 except:
@@ -658,11 +658,11 @@ def menuExplore(turns):
                                          ", ".join(list(folder.folders["merchants"].contents[i].inventory))))
           id += 1
         cmd = "alfalfa"
-        correct_confirm = False
-        while correct_confirm == False:
+        conf = False
+        while conf == False:
           try:
             target = list(folder.folders["merchants"].contents)[int(cmd) - 1]
-            correct_confirm = True
+            conf = True
           except:
             cmd = input("""
             Which merchant would you like to visit? Please enter their ID.
@@ -744,11 +744,11 @@ def menuExplore(turns):
             print("[%d] %s (%s %s - %s)" % (id, folder.folders["aviary"].contents[b].name, folder.folders["aviary"].contents[b].colour, folder.folders["aviary"].contents[b].species, folder.folders["aviary"].contents[b].rarity))
 
           target = "alfalfa"
-          correct_confirm == False
+          conf == False
 
           # Select bird
 
-          while correct_confirm == False:
+          while conf == False:
             try:
               target = list(folder.folders["aviary"].contents)[int(target) - 1]
             except:
