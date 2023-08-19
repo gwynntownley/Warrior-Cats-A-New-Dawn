@@ -1,7 +1,7 @@
 import random
 
 # import clan class from clan script
-
+from bin.text import catText
 from entity.clan import clan
 from entity.map import landmarks
 from entity.rank import rank, rankTemplates
@@ -533,35 +533,22 @@ def genKit(c, Aparent, Bparent, kit_count):
 
     # Name kit
 
-    if Aparent == leader:
+    if Aparent == leader or Bparent == leader:
       rando = (random.randint(1, 2))
-      if rando == 1 and Bparent in clan.clans[c].cats:
+      if rando == 1 and ((Aparent == leader and Bparent in clan.clans[c].cats) or (Bparent == leader and Aparent in clan.clans[c].cats)):
         root = (random.choice(cat.roots))
-        print("%s has named a %s kit %s." % (clan.clans[c].cats[Aparent].age_status[Bparent].name,
+        if Aparent == leader:
+          temp = Bparent
+        else:
+          temp = Aparent
+        print("%s has named a %s kit %s." % (clan.clans[c].cats[Aparent].age_status[temp].name,
                                              clan.clans[c].cats[var_name].description, root))
       else :
-        root = input("""What would you like to name your kit, a(n) %s ? root only please.
-        
-        > """ % clan.clans[c].cats[var_name].description)
+        root = input(catText["nameKit"] % clan.clans[c].cats[var_name].description)
         
       clan.clans[c].cats[var_name].root = root
 
       clan.clans[c].cats[var_name].title = "Kit"
-
-    elif Bparent == leader:
-      rando = (random.randint(1, 2))
-      if rando == 1:
-        root = input("""What would you like to name your kit, a(n) %s ? root only please.
-        
-        > """ % clan.clans[c].cats[var_name].description)
-      else:
-        root = (random.choice(cat.roots))
-        print("%s has named a %s kit %s." % (clan.clans[c].cats[Aparent].name, clan.clans[c].cats[var_name].description, root))
-
-      clan.clans[c].cats[var_name].root = root
-
-      clan.clans[c].cats[var_name].title = "Kit"
-    
     else:
       root = (random.choice(cat.roots))
       clan.clans[c].cats[var_name].root = root
@@ -805,11 +792,9 @@ def genCat(c, assign):
 
       clan.clans["player_Clan"].cats[var_name].wp = clan.clans["player_Clan"].cats[var_name].stats["Willpower"]
 
-      print("Your patrol has brought back a(n) %s named %s. They would like to join %s." % (clan.clans["player_Clan"].cats[var_name].description, clan.clans["player_Clan"].cats[var_name].root, clan.clans["player_Clan"].name))
+      print(catText["recruitIntro"] % (clan.clans["player_Clan"].cats[var_name].description, clan.clans["player_Clan"].cats[var_name].root, clan.clans["player_Clan"].name))
 
-      accepted = input("""Do you accept them into %s? [Y/N]
-
-      > """ % clan.clans["player_Clan"].name).lower()
+      accepted = input(catText["recruitAccept"] % clan.clans["player_Clan"].name).lower()
 
       if accepted == "y":
         accepted = True
@@ -879,12 +864,9 @@ def genCat(c, assign):
             id += 1
 
           cmd = "alfalfa"
-          correct_confirm = False
-          while correct_confirm == False:
-            cmd = input("""
-            Please enter the ID of the cat you would like to make %spaw's mentor below.
-
-            > """ % clan.clans["player_Clan"].cats[var_name].root)
+          conf = False
+          while conf == False:
+            cmd = input(catText["mentorAssign"] % clan.clans["player_Clan"].cats[var_name].root)
 
             try:
               if list(possible_mentors)[int(cmd) - 1] in clan.clans[c].cats[var_name].relationships:
@@ -892,11 +874,11 @@ def genCat(c, assign):
               else:
                 clan.clans[c].cats[var_name].relationships[list(possible_mentors)[int(cmd) - 1]] = ["mentor", 0]
 
-              print("%s is now %spaw's mentor." % (clan.clans["player_Clan"].cats[list(possible_mentors)[int(cmd) - 1]].name, clan.clans["player_Clan"].cats[var_name].root))
+              print(catText["mentorConf"] % (clan.clans["player_Clan"].cats[list(possible_mentors)[int(cmd) - 1]].name, clan.clans["player_Clan"].cats[var_name].root))
 
-              correct_confirm = True
+              conf = True
             except:
-              correct_confirm = False
+              conf = False
 
           if clan.clans["player_Clan"].cats[list(possible_mentors)[int(cmd) - 1]].rank == "medicine cat":
             clan.clans["player_Clan"].cats[var_name].rank = "medicine apprentice"
@@ -934,7 +916,7 @@ def genCat(c, assign):
           clan.clans["player_Clan"].cats[var_name].stats["Strength"] += 2
           clan.clans["player_Clan"].cats[var_name].stats["Precision"] -= 2
 
-        print("%s has joined the %s." % (clan.clans["player_Clan"].cats[var_name].name, clan.clans["player_Clan"].noun))
+        print(catText["recruitConf"] % (clan.clans["player_Clan"].cats[var_name].name, clan.clans["player_Clan"].noun))
         
         clan.clans[c].cats[var_name].loc = clan.clans[c].name + " camp"
       else:
