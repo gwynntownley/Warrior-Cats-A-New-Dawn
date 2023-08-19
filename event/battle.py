@@ -89,15 +89,15 @@ def battle(battle_type, battler):
         print("No more cats are able to join the party.")
         break
       else:
-        correct_confirm = False
+        conf = False
         cmd = "alfalfa"
-        while correct_confirm == False:
+        while conf == False:
           try:
 
             target = possibles[int(cmd) - 1]
             fighters[target] = clan.clans["player_Clan"].cats[target]
             clan.clans["player_Clan"].cats[target].loc = "fighting"
-            correct_confirm = True
+            conf = True
           except:
             cmd = input("""Which cat would you like to send? Enter their ID.
             
@@ -142,14 +142,14 @@ def battle(battle_type, battler):
             print("No more cats are able to join the party.")
             break
           else:
-            correct_confirm = False
+            conf = False
             cmd = "alfalfa"
-            while correct_confirm == False:
+            while conf == False:
               try:
                 target = possibles[int(cmd) - 1]
                 fighters[target] = clan.clans["player_Clan"].cats[target]
                 clan.clans["player_Clan"].cats[target].loc = "fighting"
-                correct_confirm = True
+                conf = True
               except:
                 cmd = input("""Which cat would you like to send? Enter their ID.
                 
@@ -260,12 +260,12 @@ def battle(battle_type, battler):
         for a in attackers.copy():
           print("[%d] lvl %d %s - %d/%d WP" % (id, attackers[a].lvl, attackers[a].name, attackers[a].wp, attackers[a].stats["Willpower"]))
           id += 1
-        correct_confirm = False
+        conf = False
         cmd = "alfalfa"
-        while correct_confirm == False:
+        while conf == False:
           try:
             target = list(attackers)[int(cmd) - 1]
-            correct_confirm = True
+            conf = True
           except:
             cmd = input("""Which enemy would you like %s to attack? Enter their ID.
             
@@ -295,16 +295,16 @@ def battle(battle_type, battler):
           elif c == "Killing Blow":
             print("[%d] Killing Blow - Instantly kills the target. High failure rate." % id) 
           id += 1
-        correct_confirm = False
+        conf = False
         cmd = "alfalfa"
         move = "Pounce"
-        while correct_confirm == False:
+        while conf == False:
           try:
             if int(cmd) == 0:
               move = "Pounce"
             else:
               move = fighters[i].moves[int(cmd) - 1]
-            correct_confirm = True
+            conf = True
           except:
             cmd = input("""With which move? Enter its ID.
             
@@ -479,12 +479,12 @@ def battle(battle_type, battler):
         for a in attackers.copy():
           print("[%d] lvl %d %s - %d/%d WP" % (id, attackers[a].lvl, attackers[a].name, attackers[a].wp, attackers[a].stats["Willpower"]))
           id += 1
-        correct_confirm = False
+        conf = False
         cmd = "alfalfa"
-        while correct_confirm == False:
+        while conf == False:
           try:
             target = list(attackers)[int(cmd) - 1]
-            correct_confirm = True
+            conf = True
           except:
             cmd = input("""Which enemy would you like %s to investigate? Enter their ID.
             
