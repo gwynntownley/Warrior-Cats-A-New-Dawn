@@ -1,5 +1,7 @@
 WARRIOR CATS : A NEW DAWN (or 'WCND')
 
+I. INFORMATION REGARDING PRODUCT
+
 A. VERSION
 
 The first stable release of WCND was the beta 0.1, released
@@ -99,3 +101,31 @@ storage
 --social
 -view
 --allegiances
+
+II. TERMS OF SERVICE
+
+Your use of the Service (Warrior Cats : A New Dawn) provided herein is 
+subject to our Terms of Service. You must read and accept these terms
+to use this Service. If you do not accept the terms, you must cease
+use of the Service.
+
+These terms are an outline of legal action that could be potentially
+taken on any parties named in this agreement: the Service Provider (ANNWYN MEDIA),
+the User (YOU), and relavent third-party entities (the ERIN HUNTER TEAM, HARPER-COLLINS
+PUBLISHING, and WORKING PARTNERS LIMITED). This agreement is legally binding insofar as
+breaching of the agreement, if brought to the awareness of the Service Provider or appropriate
+jurisdiction, will result in legal action. However, this agreement has not been written or reviewed
+by a legal expert.
+
+A. ACCEPTABLE USE
+
+The Service may be used in the following ways:
+  1. Run as a computer program for the purpose of entertainment
+  2. Recorded and broadcast for entertainment, educational, or critical purposes
+  3. Used as basis for derivative works (User Content)
+  4. Packaged and shared among others without any User modification (Torrenting/"Bootlegging"). 
+
+B. PROHIBITED USE
+
+Use of the Service in the following ways are prohibited by the Service Provider:
+  1. Packaged and shared among others after being modified by the User (i.e. as malware)
