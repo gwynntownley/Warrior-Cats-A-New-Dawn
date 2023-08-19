@@ -69,8 +69,8 @@ def menuMeeting():
     "sourceRank" : None,
     "ageMin" : None
     }, None, None)
-      confirm = False
-      while not confirm:
+      conf = False
+      while not conf:
 
         cmd = input("""
         Welcome to the WCND Rank Builder! Here you can
@@ -116,7 +116,7 @@ def menuMeeting():
         if cmd == "F":
           print("Your %smates have accepted the '%s' rank into %s." % (clan.clans["player_Clan"].noun, newRank.name, clan.clans["player_Clan"].name))
           clan.clans["player_Clan"].ranks[newRank.name] = newRank
-          confirm = True
+          conf = True
           
         elif cmd == "T":
           print("Select the template you would like to use.")
@@ -321,15 +321,15 @@ def menuMeeting():
         print("You cannot select any more cats.")
         done = True
       else:      
-        correct_confirm = False
+        conf = False
         sel = "alfalfa"
-        while correct_confirm == False:
+        while conf == False:
           try:
             if str(sel).lower() == "done":
               done = True
             else:
               selected.append(possibles[int(sel) - 1])
-            correct_confirm = True
+            conf = True
           except Exception as e:
             sel = input("""Enter the ID of the cat you would like to select below. Reply 'done' when you are done. You may
             select as many cats as you would like.
