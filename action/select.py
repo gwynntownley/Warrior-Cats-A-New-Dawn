@@ -93,9 +93,9 @@ def actionSelect(action):
         failed = True
       clock["turns"] += 1
     else:      
-      correct_confirm = False
+      conf = False
       cmd = "alfalfa"
-      while correct_confirm == False:
+      while conf == False:
         try:
           if str(cmd).lower() == "done":
             done = True
@@ -123,7 +123,7 @@ def actionSelect(action):
               else:
                 clan.clans["player_Clan"].cats[target].loc = "on a(n) %s with %s" % (keywords[0], clan.clans["player_Clan"].cats[captain].name)
                 chosen.append(target)
-          correct_confirm = True
+          conf = True
         except Exception as e:
           if choseCap == False:
             cmd = input(selectText["capAdd"] % keywords[1])
