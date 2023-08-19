@@ -29,12 +29,12 @@ def parseOpt(oldopt):
         i += 1
         
 def parseSel(selection, prompt):
-  confirm = False
+  conf = False
   cmd = "alfalfa"
-  while confirm == False:
+  while conf == False:
     try:
       choice = selection[int(cmd) - 1]
-      confirm = True
+      conf = True
     except:
       cmd = input(prompt)
   return choice
