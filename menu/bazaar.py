@@ -54,8 +54,8 @@ def menuBazaar():
       cmd = cmd.upper()
     if cmd == "Y":
       amt = "alfalfa"
-      correct_confirm = False
-      while correct_confirm == False:
+      conf = False
+      while conf == False:
         try:
           if (price * int(amt)) > clan.clans["player_Clan"].prey:
             print("""
@@ -65,7 +65,7 @@ def menuBazaar():
             clan.clans["player_Clan"].herbs += int(amt)
             print("""
             [Jay] : "Here ya go. Have a day." """)
-          correct_confirm = True
+          conf = True
         except:
           amt = input("""
           [Jay] : "How many herbs we talkin' here? Don't worry about stock, I can get more in a flash if you order more than I got on me." 
@@ -116,7 +116,7 @@ def menuBazaar():
       # Set action
 
       if cmd == "E":
-        correct_confirm = True
+        conf = True
         action = "exit"
       elif cmd == "W":
         action = "withdraw"
@@ -124,14 +124,14 @@ def menuBazaar():
         action = "deposit"
           
       cmd = "alfalfa"
-      correct_confirm = False
+      conf = False
 
       # Select
 
-      while correct_confirm == False:
+      while conf == False:
         try:
           target = list(folder.folders["bank"].contents)[int(cmd)]
-          correct_confirm = True
+          conf = True
         except:
           cmd = input("""
 
@@ -144,8 +144,8 @@ def menuBazaar():
       if action == "withdraw":
         if folder.folders["bank"].contents[target] > 0:
           amt = "alfalfa"
-          correct_confirm = False
-          while correct_confirm == False:
+          conf = False
+          while conf == False:
             try: 
               if int(amt) > folder.folders["bank"].contents[target]:
                 amt = folder.folders["bank"].contents[target]
@@ -166,7 +166,7 @@ def menuBazaar():
 
                 print("""[Liz] : "...enjoy your %d %s... have a good day." """ % (amt, target))
               
-              correct_confirm = True
+              conf = True
               purchased = True
 
             except:
@@ -184,8 +184,8 @@ def menuBazaar():
       elif action == "deposit":
         if folder.folders["bank"].contents[target] == limit:
           amt = "alfalfa"
-          correct_confirm = False
-          while correct_confirm == False:
+          conf = False
+          while conf == False:
             try: 
               if int(amt) > limit:
                 amt = folder.folders["bank"].contents[target]
@@ -207,7 +207,7 @@ def menuBazaar():
 
                 print("""[Liz] : "...%d %s has been deposited... have a good day." """ % (amt, target))
               
-              correct_confirm = True
+              conf = True
               purchased = True
 
             except:
@@ -234,11 +234,11 @@ def menuBazaar():
                                      ", ".join(list(folder.folders["merchants"].contents[i].inventory))))
       id += 1
     cmd = "alfalfa"
-    correct_confirm = False
-    while correct_confirm == False:
+    conf = False
+    while conf == False:
       try:
         target = list(folder.folders["merchants"].contents)[int(cmd) - 1]
-        correct_confirm = True
+        conf = True
       except:
         cmd = input("""
         Which merchant would you like to visit? Please enter their ID.
