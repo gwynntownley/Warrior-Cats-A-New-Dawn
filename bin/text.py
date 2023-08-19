@@ -102,6 +102,30 @@ clockText = {
 
 }
 
+### ENTITY/CAT
+
+catText = {
+
+  "nameKit" : """What would you like to name your kit, a(n) %s ? root only please.
+        
+        > """,
+
+  "recruitIntro" : "Your patrol has brought back a(n) %s named %s. They would like to join %s.",
+
+  "recruitAccept" : """Do you accept them into %s? [Y/N]
+
+      > """,
+
+  "mentorAssign" : """
+            Please enter the ID of the cat you would like to make %spaw's mentor below.
+
+            > """,
+
+  "mentorConf" : "%s is now %spaw's mentor.",
+
+  "recruitConf" : "%s has joined the %s.",
+}
+
 ### MENU/MAIN
 
 mainText = {
