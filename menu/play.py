@@ -198,22 +198,22 @@ def menuPlay(clock, symbols):
                 print("%d : %s" % (id, clan.clans[i].name))
                 possibles.append(i)
                 id += 1
-            correct_confirm = False
+            conf = False
             target = "alfalfa"
-            while correct_confirm == False:
+            while conf == False:
               try:
                 target = possibles[int(target) - 1]
-                correct_confirm = True
+                conf = True
               except:
                 target = input("""Who do you want to send a gift to? You cannot choose yourself.
                 
                 > """)
-            correct_confirm = False
+            conf = False
             amount = "alfalfa"
-            while correct_confirm == False:
+            while conf == False:
               try:
                 amount = int(amount)
-                correct_confirm = True
+                conf = True
               except:
                 amount = input("""How much prey would you like to gift them?
                 
@@ -341,12 +341,12 @@ def menuPlay(clock, symbols):
           for i in clan.clans["player_Clan"].cats.copy():
             print("%d: %s" % (id, clan.clans["player_Clan"].cats[i].name))
             id += 1
-          correct_confirm = False
+          conf = False
           cmd = "alfalfa"
-          while correct_confirm == False:
+          while conf == False:
             try:
               target = list(clan.clans["player_Clan"].cats)[int(cmd) - 1]
-              correct_confirm = True
+              conf = True
             except:
               cmd = input("""Which cat would you like to view? Type in their assigned ID.
               
@@ -416,12 +416,12 @@ def menuPlay(clock, symbols):
             if not i == "player_Clan":
               print("%d: %s" % (id, clan.clans[i].name))
               id += 1
-          correct_confirm = False
+          conf = False
           cmd = "alfalfa"
-          while correct_confirm == False:
+          while conf == False:
             try:
               target = list(clan.clans)[int(cmd)]
-              correct_confirm = True
+              conf = True
             except:
               cmd = input("""Which Clan would you like to view? Enter their ID.
               
