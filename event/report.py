@@ -97,8 +97,8 @@ def checkCats(c):
           points = 5
           while points > 0:
             cmd = "alfalfa"
-            correct_confirm = False
-            while correct_confirm == False:
+            conf = False
+            while conf == False:
               try:
                 if int(cmd) == 1:
                   clan.clans["player_Clan"].cats[i].stats["Willpower"] += 5
@@ -119,7 +119,7 @@ def checkCats(c):
                   clan.clans["player_Clan"].cats[i].stats["Charisma"] += 1
                   print("CHA has been increased by 1.")
                 points -= 1
-                correct_confirm = True
+                conf = True
               except:
                 cmd = input("""
                 =%s's Stats [LVL %d (%d xp)]=
