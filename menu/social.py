@@ -28,15 +28,15 @@ def menuSocial():
               print("%d: %s (%d)" % (id, clan.clans["player_Clan"].cats[i].name, clan.clans["player_Clan"].cats[i].rep))
               id += 1
               possibles.append(i)
-          correct_confirm = False
+          conf = False
           cmd = "alfalfa"
 
           # Select cat
           
-          while correct_confirm == False:
+          while conf == False:
             try:
                 target = possibles[int(cmd) - 1]
-                correct_confirm = True
+                conf = True
             except:
                 cmd = input("""Which cat would you like to interact with? Type in their assigned ID.
                 
@@ -294,15 +294,15 @@ def menuSocial():
             print("You have nothing to give them!")
             clock["turns"] += 1
           else:
-            correct_confirm = False
+            conf = False
             cmd = "alfalfa"
 
             # Give item
             
-            while correct_confirm == False:
+            while conf == False:
               try:
                 cmd = unlocked[int(cmd)]
-                correct_confirm = True
+                conf = True
               except:
                 cmd = input("""Which item would you like to give them? Enter their ID.
                 
