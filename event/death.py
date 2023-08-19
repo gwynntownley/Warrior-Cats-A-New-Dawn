@@ -111,13 +111,13 @@ def death(dead_guy, cause):
         print("Reload to start again!")
         sys.exit(0)
       else:
-        correct_confirm = False
+        conf = False
         cmd = "alfalfa"
-        while correct_confirm == False:
+        while conf == False:
           try:
             new_deputy = choices[int(cmd) - 1]
             clan.clans["player_Clan"].cats[new_deputy].rank = "deputy"
-            correct_confirm = True
+            conf = True
           except:
             cmd = input("""Who would you like to promote? Please enter the cat's ID.
 
