@@ -162,6 +162,36 @@ mapText = {
   
 }
 
+### EVENT/BATTLE
+
+battleText = {
+
+  "predatorApproach" : "A lvl %d %s has approached!",
+
+  "partyPredator" : "You must organise a party to counter the %s!",
+
+  "partyNone" : "No more cats are able to join the party.",
+
+  "partyAdd" : """Which cat would you like to send? Enter their ID.
+            
+            > """,
+
+  "factionApproach" : "%s's battle squadron includes...",
+
+  "partyFaction" : "You must organise a party to combat %s's forces!",
+
+  "factionDestroy" : "You cannot attack %s, for they have been destroyed!",
+
+  "traitorApproachA" : "The traitor has approached. It is so dark, you cannot tell their identity...",
+
+  "leaderBattle" : "A battle has begun, a battle for your life!",
+
+  "duelApproach" : "You have entered a duel against %s!",
+
+  "mercenaryApproach" : "You recognize the mercenary immediately as %s, of %s."
+  
+}
+
 ### MENU/MAIN
 
 mainText = {
