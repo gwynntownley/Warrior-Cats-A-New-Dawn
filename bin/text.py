@@ -126,6 +126,16 @@ catText = {
   "recruitConf" : "%s has joined the %s.",
 }
 
+### ENTITY/CLAN
+
+clanText = {
+
+  "clanHome" : "%s's home is a/n %s, %s",
+
+  "clanMark" : "Their camp is adjacent to a(n) %s."
+  
+}
+
 ### MENU/MAIN
 
 mainText = {
