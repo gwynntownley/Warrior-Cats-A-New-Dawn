@@ -1,4 +1,5 @@
 import random
+from bin.text import battleText
 from entity.clan import clan
 from entity.map import land, predators_ind
 from event.death import death
@@ -68,11 +69,11 @@ def battle(battle_type, battler):
           attackers[var_name].stats[upgrade] += 1
       attackers[var_name].wp = attackers[var_name].stats["Willpower"]
       
-      print("A lvl %d %s has approached!" % (attackers[var_name].lvl, attackers[var_name].name))
+      print(battleText["predatorApproach"] % (attackers[var_name].lvl, attackers[var_name].name))
 
     # Form patrol
     
-    print("You must organise a party to counter the %s!" % predator_type)
+    print(battleText["partyPredator"] % predator_type)
     for i in range(4):
       id = 1
       possibles = []
@@ -86,7 +87,7 @@ def battle(battle_type, battler):
           possibles.append(i)
           id += 1
       if id == 1:
-        print("No more cats are able to join the party.")
+        print(battleText["partyNone"])
         break
       else:
         conf = False
@@ -99,9 +100,7 @@ def battle(battle_type, battler):
             clan.clans["player_Clan"].cats[target].loc = "fighting"
             conf = True
           except:
-            cmd = input("""Which cat would you like to send? Enter their ID.
-            
-            > """)
+            cmd = input(battleText["partyAdd"])
 
   # Clan battle
   
@@ -115,7 +114,7 @@ def battle(battle_type, battler):
 
         # Generate enemy squadron
         
-        print("%s's battle squadron includes..." % clan.clans[battler].name)
+        print(battleText["factionApproach"] % clan.clans[battler].name)
         for i in range(count):
           if len(list(clan.clans[battler].cats)) > 0:
             var_name = (random.choice(list(clan.clans[battler].cats)))
@@ -125,7 +124,7 @@ def battle(battle_type, battler):
 
         # Form patrol
         
-        print("You must organise a party to combat %s's forces!" % clan.clans[battler].name)
+        print(battleText["partyFaction"] % clan.clans[battler].name)
         for i in range(8):
           id = 1
           possibles = []
@@ -139,7 +138,7 @@ def battle(battle_type, battler):
               possibles.append(i)
               id += 1
           if id == 1:
-            print("No more cats are able to join the party.")
+            print(battleText["partyNone"])
             break
           else:
             conf = False
@@ -151,11 +150,9 @@ def battle(battle_type, battler):
                 clan.clans["player_Clan"].cats[target].loc = "fighting"
                 conf = True
               except:
-                cmd = input("""Which cat would you like to send? Enter their ID.
-                
-                > """)
+                cmd = input(battleText["partyAdd"])
     else:
-      print("You cannot attack %s, for they have been destroyed!" % clan.clans[battler].name)
+      print(battleText["factionDestroy"] % clan.clans[battler].name)
       over = True
       winner = "destroyed"
 
@@ -169,8 +166,8 @@ def battle(battle_type, battler):
                                clan.clans["player_Clan"].cats[battler].lvl, clan.clans["player_Clan"].cats[battler].stats)
     attackers[battler].name = "traitor"
 
-    print("The traitor has approached. It is so dark, you cannot tell their identity...")
-    print("A battle has begun, a battle for your life!")
+    print(battleText["traitorApproachA"])
+    print(battleText["leaderBattle"])
 
     for i in clan.clans["player_Clan"].cats.copy():
       if clan.clans["player_Clan"].cats[i].rank == "leader":
@@ -185,7 +182,7 @@ def battle(battle_type, battler):
     
     attackers[battler] = clan.clans["player_Clan"].cats[battler]
 
-    print("You have entered a duel against %s!" % attackers[battler].name)
+    print(battleText["duelApproach"] % attackers[battler].name)
 
     for i in clan.clans["player_Clan"].cats.copy():
       if clan.clans["player_Clan"].cats[i].rank == "leader":
@@ -210,8 +207,8 @@ def battle(battle_type, battler):
 
     attackers[mercenary].wp = attackers[mercenary].stats["Willpower"]
 
-    print("You recognize the mercenary immediately as %s, of %s." % (attackers[mercenary].name, clan.clans[battler].name))
-    print("A battle has begun, a battle for your life!")
+    print(battleText["mercenaryApproach"] % (attackers[mercenary].name, clan.clans[battler].name))
+    print(battleText["leaderBattle"])
 
     for i in clan.clans["player_Clan"].cats.copy():
       if clan.clans["player_Clan"].cats[i].rank == "leader":
