@@ -1,8 +1,9 @@
 import random
 
+from bin.text import mapText
+from data.file import codebits
 from entity.clan import clan
 
-from data.file import codebits
 
 biomes = {
 'forest' : ['temperate forest', 'taiga', 'deep woodland', 'rainforest', 'rainforest canopy'],
@@ -547,7 +548,7 @@ def seeMap(mode):
                 else:
                     ind3 = str(list(land.coordinates[sortedLand[num + 2][0]]).index(sortedLand[num + 2][1]))
                     
-                print("[%s%s] %s - %s    [%s%s] %s - %s    [%s%s] %s - %s" %(
+                print(mapText["threeList"] %(
                 codebits[sortedLand[num][0]], ind1,
                 land.coordinates[sortedLand[num][0]][sortedLand[num][1]].name,
                 land.coordinates[sortedLand[num][0]][sortedLand[num][1]].biome,
@@ -571,7 +572,7 @@ def seeMap(mode):
                 else:
                     ind2 = str(list(land.coordinates[sortedLand[num + 1][0]]).index(sortedLand[num + 1][1]))
                     
-                print("[%s%s] %s - %s    [%s%s] %s - %s" %(
+                print(mapText["twoList"] %(
                 codebits[sortedLand[num][0]], ind1,
                 land.coordinates[sortedLand[num][0]][sortedLand[num][1]].name,
                 land.coordinates[sortedLand[num][0]][sortedLand[num][1]].biome,
@@ -587,7 +588,7 @@ def seeMap(mode):
                 else:
                     ind1 = str(list(land.coordinates[sortedLand[num][0]]).index(sortedLand[num][1]))
                 
-                print("[%s%s] %s - %s" %(
+                print(mapText["oneList"] %(
                 codebits[sortedLand[num][0]], ind1,
                 land.coordinates[sortedLand[num][0]][sortedLand[num][1]].name,
                 land.coordinates[sortedLand[num][0]][sortedLand[num][1]].biome))
@@ -599,13 +600,7 @@ def seeMap(mode):
     y = None
     x = None
 
-    cmd = input("""
-    Please enter the coordinate of the territory you would
-    like to select below. Like so : YXX, i.e. A02, D14 ...
-
-    If you would not like to select anything, just press ENTER.
-
-    > """)
+    cmd = input(mapText["landSelect"])
 
     try:
     
@@ -637,7 +632,7 @@ def spawn(c):
 
     land.coordinates[loc_y][location].owner = c
 
-    return (random.choice(["which is patrolled by %s." % random.choice(list(land.coordinates[loc_y][location].predators)),
-    "notable for its %s." % random.choice(list(land.coordinates[loc_y][location].plants)),
-    "rich in %s-prey." % random.choice(list(land.coordinates[loc_y][location].prey))])), loc_y, location
+    return (random.choice(mapText["predators"] % random.choice(list(land.coordinates[loc_y][location].predators)),
+    mapText["plants"] % random.choice(list(land.coordinates[loc_y][location].plants)),
+    mapText["prey"] % random.choice(list(land.coordinates[loc_y][location].prey))])), loc_y, location
 
