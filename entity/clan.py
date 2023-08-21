@@ -1,5 +1,7 @@
 import random
 
+from bin.text import clanText
+
 # clan objects
 
 class clan(object):
@@ -174,7 +176,7 @@ def genClan():
                             "notable for its %s." % random.choice(list(land.coordinates[loc_y][location].plants)),
                             "rich in %s-prey." % random.choice(list(land.coordinates[loc_y][location].prey))]))
     
-    print("%s's home is a/n %s, %s" % (clan.clans[clan_var].name, land.coordinates[loc_y][location].biome, notable))
+    print(clanText["clanHome"] % (clan.clans[clan_var].name, land.coordinates[loc_y][location].biome, notable))
 
     if not land.coordinates[loc_y][location].landmark == None:
-      print("Their camp is adjacent to a(n) %s." % land.coordinates[loc_y][location].landmark)  
+      print(clanText["clanMark"] % land.coordinates[loc_y][location].landmark)  
