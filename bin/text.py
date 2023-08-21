@@ -136,6 +136,32 @@ clanText = {
   
 }
 
+### ENTITY/MAP
+
+mapText = {
+  
+  "threeList" : "[%s%s] %s - %s    [%s%s] %s - %s    [%s%s] %s - %s",
+
+  "twoList" : "[%s%s] %s - %s    [%s%s] %s - %s",
+  
+  "oneList" : "[%s%s] %s - %s",
+
+  "landSelect" : """
+    Please enter the coordinate of the territory you would
+    like to select below. Like so : YXX, i.e. A02, D14 ...
+
+    If you would not like to select anything, just press ENTER.
+
+    > """,
+
+  "predators" : "which is patrolled by %s.",
+
+  "plants" : "notable for its %s.",
+
+  "prey" : "rich in %s-prey."
+  
+}
+
 ### MENU/MAIN
 
 mainText = {
