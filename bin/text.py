@@ -188,8 +188,62 @@ battleText = {
 
   "duelApproach" : "You have entered a duel against %s!",
 
-  "mercenaryApproach" : "You recognize the mercenary immediately as %s, of %s."
+  "mercenaryApproach" : "You recognize the mercenary immediately as %s, of %s.",
+
+  "action" : """
+        Level %d | %d/%d WP
+
+        STR %d | TGH %d | SPD %d | PRS %d | CHA %d
+
+        What would you like %s to do?
+        
+        [A]ttack 
+        [R]est 
+        [C]heck
+        [F]lee [SPD]
+        
+        > """,
+
+  "target" : """Which enemy would you like %s to attack? Enter their ID.
+            
+            > """,
+
+  "pounce" : "[0] Pounce - Does little damage.",
+
+  "claw" : "[%d] Claw - Does a decent amount of damage. [STR]",
+
+  "pin" : "[%d] Pin Down - Does little damage, but stuns the target for a turn. [STR]",
+
+  "quick" : "[%d] Quick Claw - Does little damage, but strikes multiple times in quick succession. [STR] [SPD]",
+
+  "sneak" : "[%d] Sneak - Does a decent amount of damage. Removes cat from the party for a turn, only to return the next turn to attack the target. [STR]",
+
+  "bite" : "[%d] Fierce Bite - Does a very high amount of damage. Takes a turn to charge; may stun the target. [STR]",
+
+  "rage" : "[%d] Rage - Does a completely random amount of damage. 50 percent recoil and a small chance to attack again in the same turn. [STR]",
+
+  "diplomacy" : "[%d] Diplomacy - Attempts to reason with an opponent. [CHA]",
+
+  "meditate" : "[%d] Meditate - Heals a small amount of wp to every cat in your party. [PRS]",
   
+  "instaKill" : "[%d] Killing Blow - Instantly kills the target if successful. High failure rate.",
+
+  "moveSel" : """With which move? Enter its ID.
+            
+            > """,
+
+  "playerMiss" : "The move missed! %s must not be skilled enough to use this move...",
+
+  "useSneak" : "%s has disappeared from view, preparing to strike from the shadows...",
+
+  "useBite" : "%s is building energy...",
+
+  "heal" : "%s was healed %d WP!",
+
+  "killFail" : "%s's blow missed!",
+
+  "killSuccess" : "%s's blow made contact!",
+
 }
 
 ### MENU/MAIN
