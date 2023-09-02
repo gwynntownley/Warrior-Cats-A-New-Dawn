@@ -231,19 +231,7 @@ def battle(battle_type, battler):
 
         # Fighter stats + options
         
-        cmd = input("""
-        Level %d | %d/%d WP
-
-        STR %d | TGH %d | SPD %d | PRS %d | CHA %d
-
-        What would you like %s to do?
-        
-        [A]ttack 
-        [R]est 
-        [C]heck
-        [F]lee [SPD]
-        
-        > """ % (fighters[i].lvl, fighters[i].wp, fighters[i].stats["Willpower"], fighters[i].stats["Strength"], fighters[i].stats["Toughness"], fighters[i].stats["Speed"],fighters[i].stats["Precision"], fighters[i].stats["Charisma"], fighters[i].name))
+        cmd = input(battleText["action"] % (fighters[i].lvl, fighters[i].wp, fighters[i].stats["Willpower"], fighters[i].stats["Strength"], fighters[i].stats["Toughness"], fighters[i].stats["Speed"],fighters[i].stats["Precision"], fighters[i].stats["Charisma"], fighters[i].name))
 
         cmd = cmd.upper()
 
@@ -264,33 +252,31 @@ def battle(battle_type, battler):
             target = list(attackers)[int(cmd) - 1]
             conf = True
           except:
-            cmd = input("""Which enemy would you like %s to attack? Enter their ID.
-            
-            > """ % fighters[i].name)
+            cmd = input(battleText["target"] % fighters[i].name)
 
         # Select move
         
-        print("[0] Pounce - Does little damage. This move cannot be removed or replaced, and does not have a level requirement.")
+        print(battleText["pounce"])
         id = 1
         for c in fighters[i].moves:
           if c == "Claw":
-            print("[%d] Claw - Does a decent amount of damage. [STR]" % id)
+            print(battleText["claw"] % id)
           elif c == "Pin Down":
-            print("[%d] Pin Down - Does little damage, but stuns the target for a turn. [STR]" % id)
+            print(battleText["pin"] % id)
           elif c == "Quick Claw":
-            print("[%d] Quick Claw - Does little damage, but strikes multiple times in quick succession. [STR] [SPD]" % id)
+            print(battleText["quick"] % id)
           elif c == "Sneak":
-            print("[%d] Sneak - Does a decent amount of damage. Removes cat from the party for a turn, only to return the next turn to attack the target. [STR]" % id)
+            print(battleText["sneak"] % id)
           elif c == "Fierce Bite":
-            print("[%d] Fierce Bite - Does a very high amount of damage. Takes a turn to charge; may stun the target. [STR]" % id)
+            print(battleText["bite"] % id)
           elif c == "Rage":
-            print("[%d] Rage - Does a completely random amount of damage. 50 percent recoil and a small chance to attack again in the same turn. [STR]" % id) 
+            print(battleText["rage"] % id) 
           elif c == "Diplomacy":
-            print("[%d] Diplomacy - Attempts to reason with an opponent. [CHA]" % id) 
+            print(battleText["diplomacy"] % id) 
           elif c == "Meditate":
-            print("[%d] Meditate - Heals a small amount of wp to every cat in your party. [PRS]" % id)
+            print(battleText["meditate"] % id)
           elif c == "Killing Blow":
-            print("[%d] Killing Blow - Instantly kills the target. High failure rate." % id) 
+            print(battleText["instaKill"] % id) 
           id += 1
         conf = False
         cmd = "alfalfa"
@@ -303,9 +289,7 @@ def battle(battle_type, battler):
               move = fighters[i].moves[int(cmd) - 1]
             conf = True
           except:
-            cmd = input("""With which move? Enter its ID.
-            
-            > """)
+            cmd = input(battleText["moveSel"])
 
         # Determine outcome of move
 
@@ -327,7 +311,7 @@ def battle(battle_type, battler):
         odd_min = (random.randint(0, 100))
 
         if odds < odd_min:
-          print("The move missed! %s must not be skilled enough to use this move..." % fighters[i].name)
+          print(battleText["playerMiss"] % fighters[i].name)
         else:
           
           if move == "Pounce" or move == "Pin Down" or move == "Quick Claw":
@@ -340,14 +324,14 @@ def battle(battle_type, battler):
             dmg = fighters[i].stats["Strength"] * (random.uniform(0.5, 2.5))
           
           if move == "Sneak":
-            print("%s has disappeared from view, preparing to strike from the shadows..." % fighters[i].name)
+            print(battleText["useSneak"] % fighters[i].name)
             sneaking[i] = fighters[i]
 
             sneaking_tar.append(target)
 
             del fighters[i]
           elif move == "Fierce Bite":
-            print("%s is building energy..." % fighters[i].name)
+            print(battleText["useBite"] % fighters[i].name)
             charging[i] = fighters[i]
 
             charging_tar.append(target)
@@ -357,16 +341,17 @@ def battle(battle_type, battler):
             for h in fighters.copy():
               healed = fighters[i].stats["Precision"] + (random.randint(0, 6))
               fighters[h].wp += healed
-              print("%s was healed %d WP!" % (fighters[h].name, healed))
+              print(battleText["heal"] % (fighters[h].name, healed))
               if i == leader:
                 fighters[h].rep += 1
           elif move == "Killing Blow":
-            rando = (random.randint(0, 1))
+            rando = (random.randint(0, 2))
             if rando == 0:
-              print("%s's blow missed!" % fighters[i].name)
-            else:
-              print("%s's blow made contact!" % fighters[i].name)
+              print(battleText["killSuccess"] % fighters[i].name)
               attackers[target].wp = -1
+            else:
+              print(battleText["killFail"] % fighters[i].name)
+
             if i == leader:
               for h in fighters.copy():
                 fighters[h].rep -= 2
