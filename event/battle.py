@@ -324,14 +324,14 @@ def battle(battle_type, battler):
             dmg = fighters[i].stats["Strength"] * (random.uniform(0.5, 2.5))
           
           if move == "Sneak":
-            print(battleText["useSneak"] % fighters[i].name)
+            print(battleText["pUseSneak"] % fighters[i].name)
             sneaking[i] = fighters[i]
 
             sneaking_tar.append(target)
 
             del fighters[i]
           elif move == "Fierce Bite":
-            print(battleText["useBite"] % fighters[i].name)
+            print(battleText["pUseBite"] % fighters[i].name)
             charging[i] = fighters[i]
 
             charging_tar.append(target)
@@ -341,16 +341,16 @@ def battle(battle_type, battler):
             for h in fighters.copy():
               healed = fighters[i].stats["Precision"] + (random.randint(0, 6))
               fighters[h].wp += healed
-              print(battleText["heal"] % (fighters[h].name, healed))
+              print(battleText["pHeal"] % (fighters[h].name, healed))
               if i == leader:
                 fighters[h].rep += 1
           elif move == "Killing Blow":
             rando = (random.randint(0, 2))
             if rando == 0:
-              print(battleText["killSuccess"] % fighters[i].name)
+              print(battleText["pKillSuccess"] % fighters[i].name)
               attackers[target].wp = -1
             else:
-              print(battleText["killFail"] % fighters[i].name)
+              print(battleText["pKillFail"] % fighters[i].name)
 
             if i == leader:
               for h in fighters.copy():
@@ -364,10 +364,10 @@ def battle(battle_type, battler):
             rando = (random.randint(0, 100))
 
             if odds > rando:
-              print("%s successfully persuaded the enemy %s to surrender!" % (fighters[i].name, attackers[target].name))
+              print(battleText["pDiplomacySuccess"] % (fighters[i].name, attackers[target].name))
               del attackers[target]
             else:
-              print("%s failed to persuade the enemy %s to surrender." % (fighters[i].name, attackers[target].name))
+              print(battleText["pDiplomacyFail] % (fighters[i].name, attackers[target].name))
           else:
             if attackers[target].stats["Toughness"] >= fighters[i].stats["Strength"]:
               dmg = dmg * (random.uniform(0, 0.25))
@@ -378,7 +378,7 @@ def battle(battle_type, battler):
             elif attackers[target].stats["Toughness"] / fighters[i].stats["Strength"] > 0.25:
               dmg = dmg * (random.uniform(0.75, 1))
             attackers[target].wp -= dmg
-            print("%s dealt %d damage to the enemy %s!" % (fighters[i].name, dmg, attackers[target].name))
+            print(battleText["pDamage"] % (fighters[i].name, dmg, attackers[target].name))
             if move == "Quick Claw":
               times = (random.randint(1, 2))
               if fighters[i].stats["Speed"] > attackers[target].stats["Speed"]:
@@ -389,13 +389,13 @@ def battle(battle_type, battler):
                 if dmg < 1:
                   dmg = 1
                 attackers[target].wp -= dmg
-                print("%s dealt %d damage to the enemy %s!" % (fighters[i].name, dmg, attackers[target].name))
+                print(battleText["pDamage"] % (fighters[i].name, dmg, attackers[target].name))
             elif move == "Pin Down":
               stunned[target] = attackers[target]
-              print("The enemy %s is stunned!" % attackers[target].name)
+              print(battleText["pStun"] % attackers[target].name)
             elif move == "Rage":
               recoil = dmg / 2
-              print("%s suffered %d recoil damage!" % (fighters[i].name, recoil))
+              print(battleText["pRecoil"] % (fighters[i].name, recoil))
               fighters[i].wp -= recoil
               rando = (random.randint(1, 4))
               if rando == 1:
@@ -404,14 +404,14 @@ def battle(battle_type, battler):
                 if dmg < 1:
                   dmg = 1
                 attackers[target].wp -= dmg
-                print("%s dealt %d extra damage to the enemy %s!" % (fighters[i].name, dmg, attackers[target].name))
+                print(battleText["pBonus"] % (fighters[i].name, dmg, attackers[target].name))
             if fighters[i].stats["Speed"] * 2 > attackers[target].stats["Speed"]:
                 rando = (random.randint(-2, 2))
                 dmg += rando
                 if dmg < 1:
                   dmg = 1
                 attackers[target].wp -= dmg
-                print("%s dealt %d extra damage to the enemy %s!" % (fighters[i].name, dmg, attackers[target].name))
+                print(battleText["pBonus"] % (fighters[i].name, dmg, attackers[target].name))
             for b in attackers.copy():
               if attackers[b].wp <= 0:
                 if "predator" in battle_type:
