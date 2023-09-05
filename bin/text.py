@@ -234,15 +234,27 @@ battleText = {
 
   "playerMiss" : "The move missed! %s must not be skilled enough to use this move...",
 
-  "useSneak" : "%s has disappeared from view, preparing to strike from the shadows...",
+  "pUseSneak" : "%s has disappeared from view, preparing to strike from the shadows...",
 
-  "useBite" : "%s is building energy...",
+  "pUseBite" : "%s is building energy...",
 
-  "heal" : "%s was healed %d WP!",
+  "pHeal" : "%s was healed %d WP!",
 
-  "killFail" : "%s's blow missed!",
+  "pKillSuccess" : "%s's blow made contact!",
 
-  "killSuccess" : "%s's blow made contact!",
+  "pKillFail" : "%s's blow missed!",
+
+  "pDiplomacySuccess" : "%s successfully persuaded the enemy %s to surrender!",
+
+  "pDiplomacyFail" : "%s failed to persuade the enemy %s to surrender.",
+
+  "pDamage" : "%s dealt %d damage to the enemy %s!",
+
+  "pStun" : "The enemy %s is stunned!",
+
+  "pRecoil" : "%s suffered %d recoil damage!",
+
+  "pBonus" : "%s dealt %d extra damage to the enemy %s!"
 
 }
 
