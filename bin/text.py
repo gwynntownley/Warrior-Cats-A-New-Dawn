@@ -254,7 +254,27 @@ battleText = {
 
   "pRecoil" : "%s suffered %d recoil damage!",
 
-  "pBonus" : "%s dealt %d extra damage to the enemy %s!"
+  "pBonus" : "%s dealt %d extra damage to the enemy %s!",
+
+  "eDeath" : "The enemy %s has died!",
+
+  "xpGain" : "%s has gained %d xp!",
+
+  "traitorMercy" : """The traitor is at your mercy! Will you finish them off? By killing them, you will be able to inspect and learn their identity. [Y/N]
+                  
+                  > """,
+
+  "traitorFlee" : "The traitor has fled, badly wounded!",
+
+  "mateMercy" : """%s is at your mercy! Will you finish them off? [Y/N]
+                  
+                  > """,
+
+  "mateFlee" : "%s surrenders, clearly being the loser of this battle. They are badly wounded.",
+
+  "pRestMax" : "%s rested, raising their WP to max.",
+
+  "pRest" : "%s rested, raising their WP by %d."
 
 }
 
