@@ -415,31 +415,26 @@ def battle(battle_type, battler):
             for b in attackers.copy():
               if attackers[b].wp <= 0:
                 if "predator" in battle_type:
-                  print("The enemy %s has died!" % attackers[b].name)
+                  print(battleText["eDeath"] % attackers[b].name)
                   for a in fighters.copy():
-                    print("%s has gained %d xp!" % (fighters[a].name, attackers[b].lvl))
+                    print(battleText["xpGain"] % (fighters[a].name, attackers[b].lvl))
                     fighters[a].xp += attackers[b].lvl
                 elif "traitor" in battle_type:
-                  cmd = input("""The traitor is at your mercy! Will you finish them off? By killing them, you will be able to inspect and learn their identity. [Y/N]
-                  
-                  > """)
-
+                  cmd = input(battleText["traitorMercy"])
                   if cmd == "Y" or cmd == "y":
                     dead_guy = battler
                     death(dead_guy, " of their wounds")
                   elif cmd == "N" or cmd == "n":
-                    print("The traitor has fled, badly wounded!")
+                    print(battleText["traitorFlee"])
                     clan.clans["player_Clan"].cats[battler].wp = 0
                 elif "clanmate" in battle_type:
-                  cmd = input("""%s is at your mercy! Will you finish them off? [Y/N]
-                  
-                  > """ % attackers[battler].name)
+                  cmd = input(battleText["mateMercy"] % attackers[battler].name)
 
                   if cmd == "Y" or cmd == "y":
                     dead_guy = battler
                     death(dead_guy, " of their wounds")
                   elif cmd == "N" or cmd == "n":
-                    print("%s surrenders, clearly being the loser of this battle. They are badly wounded." % clan.clans["player_Clan"].cats[battler].name)
+                    print(battleText["mateFlee"] % clan.clans["player_Clan"].cats[battler].name)
                     clan.clans["player_Clan"].cats[battler].wp = 0
                 del attackers[b]
 
@@ -449,10 +444,10 @@ def battle(battle_type, battler):
         healed = (random.randint(1, 10))
         if fighters[i].wp + healed >= fighters[i].stats["Willpower"]:
           fighters[i].wp = fighters[i].stats["Willpower"]
-          print("%s rested, raising their WP to max." % fighters[i].name)
+          print(battleText["pRestMax"] % fighters[i].name)
         else:
           fighters[i].wp += healed
-          print("%s rested, raising their WP by %d." % (fighters[i].name, healed))
+          print(battleText["pRest"] % (fighters[i].name, healed))
 
       # Check
       
