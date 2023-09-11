@@ -463,13 +463,8 @@ def battle(battle_type, battler):
             target = list(attackers)[int(cmd) - 1]
             conf = True
           except:
-            cmd = input("""Which enemy would you like %s to investigate? Enter their ID.
-            
-            > """ % fighters[i].name)
-        print("""
-        %s | Level %d | %d/%d WP
-
-        STR %d | TGH %d | SPD %d | PRS %d | CHA %d """ % (attackers[target].name, attackers[target].lvl, attackers[target].wp, attackers[target].stats["Willpower"], attackers[target].stats["Strength"], attackers[target].stats["Toughness"], attackers[target].stats["Speed"],attackers[target].stats["Precision"], attackers[target].stats["Charisma"]))
+            cmd = input(battleText["checkSelect"] % fighters[i].name)
+        print(battleText["check"] % (attackers[target].name, attackers[target].lvl, attackers[target].wp, attackers[target].stats["Willpower"], attackers[target].stats["Strength"], attackers[target].stats["Toughness"], attackers[target].stats["Speed"],attackers[target].stats["Precision"], attackers[target].stats["Charisma"]))
 
       # Flee
 
@@ -486,13 +481,13 @@ def battle(battle_type, battler):
             chance = 75
           rando = (random.randint(1, 100))
           if chance < rando:
-            print("%s tried to flee, but was caught by the enemy %s!" % (fighters[i].name, attackers[catcher].name))
+            print(battleText["pFleeFail"] % (fighters[i].name, attackers[catcher].name))
           else:
-            print("%s has fled!" % fighters[i].name)
+            print(battleText["pFleeSuccess"] % fighters[i].name)
             clan.clans["player_Clan"].cats[i] = fighters[i]
             del fighters[i]
         else:
-          print("%s has fled!" % fighters[i].name)
+          print(battleText["pFleeSuccess"] % fighters[i].name)
           clan.clans["player_Clan"].cats[i] = fighters[i]
           del fighters[i]
 
@@ -520,7 +515,7 @@ def battle(battle_type, battler):
         target = sneaking_tar[0]
         sneaking_tar.remove(target)
 
-        print("%s used Sneak!" % sneaking[i].name)
+        print(battleText["pSneak"] % sneaking[i].name)
 
         if target in attackers:
           dmg = sneaking[i].stats["Strength"] + (random.randint(1, 4))
@@ -536,44 +531,39 @@ def battle(battle_type, battler):
 
           attackers[target].wp -= dmg
 
-          print("%s dealt %d damage to the enemy %s!" % (sneaking[i].name, dmg, attackers[target].name))
+          print(battleText["pDamage"] % (sneaking[i].name, dmg, attackers[target].name))
           for b in attackers.copy():
             if attackers[b].wp <= 0:
               if "predator" in battle_type:
-                print("The enemy %s has died!" % attackers[b].name)
+                print(battleText["eDeath"] % attackers[b].name)
                 for a in fighters.copy():
-                  print("%s has gained %d xp!" % (fighters[a].name, attackers[b].lvl))
+                  print(battleText["xpGain"] % (fighters[a].name, attackers[b].lvl))
                   fighters[a].xp += attackers[b].lvl
               elif "traitor" in battle_type:
-                cmd = input("""The traitor is at your mercy! Will you finish them off? By killing them, you will be able to inspect and learn their identity. [Y/N]
-                
-                > """)
+                cmd = input(battleText["traitorMercy"])
 
                 if cmd == "Y" or cmd == "y":
                   dead_guy = battler
                   death(dead_guy, " of their wounds")
                 elif cmd == "N" or cmd == "n":
-                  print("The traitor has fled, badly wounded!")
+                  print(battleText["traitorFlee"])
                   clan.clans["player_Clan"].cats[battler].wp = 0
               elif "clanmate" in battle_type:
-                cmd = input("""%s is at your mercy! Will you finish them off? [Y/N]
-                
-                > """ % attackers[battler].name)
+                cmd = input(battleText["mateMercy"] % attackers[battler].name)
 
                 if cmd == "Y" or cmd == "y":
                   dead_guy = battler
                   death(dead_guy, " of their wounds")
                 elif cmd == "N" or cmd == "n":
-                  print("%s surrenders, clearly being the loser of this battle. They are badly wounded." % clan.clans["player_Clan"].cats[battler].name)
+                  print(battleText["mateFlee"] % clan.clans["player_Clan"].cats[battler].name)
                   clan.clans["player_Clan"].cats[battler].wp = 0
               del attackers[b]
         else:
-          print("The attack failed!")
+          print(battleText["attackFail"])
       else:
-        print("The attack failed!")
+        print(battleText["attackFail"])
         fighters[i] = sneaking[i]
         del sneaking[i]
-
 
       if len(list(fighters)) == 0 and len(list(sneaking)) == 0 and len(list(charging)) == 0:
         winner = "enemy"
@@ -599,7 +589,7 @@ def battle(battle_type, battler):
         target = charging_tar[0]
         charging_tar.remove(target)
 
-        print("%s used Fierce Bite!" % charging[i].name)
+        print(battleText["pBite"] % charging[i].name)
 
         if target in attackers:
 
