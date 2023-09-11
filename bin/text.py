@@ -276,6 +276,24 @@ battleText = {
 
   "pRest" : "%s rested, raising their WP by %d."
 
+  "checkSelect" : """Which enemy would you like %s to investigate? Enter their ID.
+            
+            > """,
+
+  "check" : """
+        %s | Level %d | %d/%d WP
+
+        STR %d | TGH %d | SPD %d | PRS %d | CHA %d """,
+
+  "pFleeFail" : "%s tried to flee, but was caught by the enemy %s!",
+
+  "pFleeSuccess" : "%s has fled!",
+
+  "pSneak" : "%s used Sneak!",
+
+  "attackFail" : "The attack failed!",
+
+  "pBite" : "%s used Fierce Bite!"
 }
 
 ### MENU/MAIN
