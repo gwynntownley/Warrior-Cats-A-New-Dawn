@@ -250,6 +250,8 @@ battleText = {
 
   "pDamage" : "%s dealt %d damage to the enemy %s!",
 
+  "eDamage" : "The enemy %s dealt %d damage to %s!",
+
   "pStun" : "The enemy %s is stunned!",
 
   "pRecoil" : "%s suffered %d recoil damage!",
@@ -293,7 +295,17 @@ battleText = {
 
   "attackFail" : "The attack failed!",
 
-  "pBite" : "%s used Fierce Bite!"
+  "pBite" : "%s used Fierce Bite!",
+
+  "eStunned" : "The enemy %s is stunned and cannot move!",
+
+  "scar" : "%s gained a scar: %s!",
+
+  "mateSpare" : "%s has defeated you, but chosen to spare you. The battle is over... you have lost.",
+
+  "mateKill" : "%s has defeated you, and has chosen to finish you off!",
+
+  "factionSpare" : "The attackers have decided to spare %s! %s fled the battle scene."
 }
 
 ### MENU/MAIN
