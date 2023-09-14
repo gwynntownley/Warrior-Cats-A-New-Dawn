@@ -606,52 +606,47 @@ def battle(battle_type, battler):
 
           attackers[target].wp -= dmg
 
-          print("%s dealt %d damage to the enemy %s!" % (charging[i].name, dmg, attackers[target].name))
+          print(battleText["pDamage"] % (charging[i].name, dmg, attackers[target].name))
 
           rando = (random.randint(1, 4))
           if rando == 1:
             
             stunned[target] = attackers[target]
-            print("The enemy %s is stunned!" % attackers[target].name)
+            print(battleText["pStun"] % attackers[target].name)
 
             for b in attackers.copy():
               if attackers[b].wp <= 0:
                 if battle_type == "predator":
-                  print("The enemy %s has died!" % attackers[b].name)
+                  print(battleText["eDeath"] % attackers[b].name)
                   for a in fighters.copy():
-                    print("%s has gained %d xp!" % (fighters[a].name, attackers[b].lvl))
+                    print(battleText["xpGain"] % (fighters[a].name, attackers[b].lvl))
                     fighters[a].xp += attackers[b].lvl
                 elif battle_type == "traitor":
-                  cmd = input("""The traitor is at your mercy! Will you finish them off? By killing them, you will be able to inspect and learn their identity. [Y/N]
-                  
-                  > """)
+                  cmd = input(battleText["traitorMercy"])
 
                   if cmd == "Y" or cmd == "y":
                     dead_guy = battler
                     death(dead_guy, " of their wounds")
                   elif cmd == "N" or cmd == "n":
-                    print("The traitor has fled, badly wounded!")
-                    clan.clans["player_Clan"].cats[battler].wp = 0
+                    print(battleText["traitorFlee"])
+                    clan.clans["player_Clan"].cats[battler].wp = 1
                 elif battle_type == "clanmate":
-                  cmd = input("""%s is at your mercy! Will you finish them off? [Y/N]
-                  
-                  > """ % attackers[battler].name)
-
+                  cmd = input(battleText["mateMercy"] % attackers[battler].name)
                   if cmd == "Y" or cmd == "y":
                     dead_guy = battler
                     death(dead_guy, " of their wounds")
                   elif cmd == "N" or cmd == "n":
-                    print("%s surrenders, clearly being the loser of this battle. They are badly wounded." % clan.clans["player_Clan"].cats[battler].name)
-                    clan.clans["player_Clan"].cats[battler].wp = 0
+                    print(battleText["mateFlee"] % clan.clans["player_Clan"].cats[battler].name)
+                    clan.clans["player_Clan"].cats[battler].wp = 1
                 del attackers[b]
 
           fighters[i] = charging[i]
           del charging[i]
 
         else:
-          print("The attack failed!")
+          print(battleText["attackFail"])
       else:
-        print("The attack failed!")
+        print(battleText["attackFail"])
         fighters[i] = charging[i]
         del charging[i]
         
@@ -701,7 +696,7 @@ def battle(battle_type, battler):
           choice = "c"
 
       if i in stunned:
-        print("The enemy %s is stunned and cannot move!" % attackers[i].name)
+        print(battleText["eStunned"] % attackers[i].name)
       
       else:
 
@@ -720,11 +715,11 @@ def battle(battle_type, battler):
             elif fighters[target].stats["Toughness"] / attackers[i].stats["Strength"] > 0.25:
               dmg = dmg * (random.uniform(0.75, 1))
             fighters[target].wp -= dmg
-            print("The enemy %s dealt %d damage to %s!" % (attackers[i].name, dmg, fighters[target].name))
-            rando = (random.randint(1, 15))
+            print(battleText["eDamage"] % (attackers[i].name, dmg, fighters[target].name))
+            rando = (random.randint(1, 60))
             if rando == 1:
               new_scar = (random.choice(cat.scars))
-              print("%s gained a scar: %s!" % (fighters[target].name, new_scar))
+              print(battleText["scar"] % (fighters[target].name, new_scar))
               fighters[target].scars.append(new_scar)
             for g in fighters.copy():
               mercy = 2
@@ -735,7 +730,7 @@ def battle(battle_type, battler):
                   mercy = (random.randint(1, 2))
                   if mercy == 1:
                     
-                    print("%s has defeated you, but chosen to spare you. The battle is over... you have lost." % attackers[battler].name)
+                    print(battleText["mateSpare"] % attackers[battler].name)
                     clan.clans["player_Clan"].cats[g].wp = 1
                     winner = "enemy"
                     break
@@ -744,13 +739,13 @@ def battle(battle_type, battler):
                   rando = (random.choice(list(attackers)))
                   if attackers[rando].stats["Charisma"] <= clan.clans["player_Clan"].cats[g].stats["Charisma"]:
                     mercy = 1
-                    print("The attackers have decided to spare %s! %s fled the battle scene." % (clan.clans["player_Clan"].cats[g].name, clan.clans["player_Clan"].cats[g].name))
+                    print(battleText["factionSpare"] % (clan.clans["player_Clan"].cats[g].name, clan.clans["player_Clan"].cats[g].name))
                     clan.clans["player_Clan"].cats[g].wp = 1
 
                 if mercy == 2:
                   if battle_type == "clanmate":
                       
-                      print("%s has defeated you, and has chosen to finish you off !" % attackers[battler].name)
+                      print(battleText["mateKill"] % attackers[battler].name)
                       winner = "enemy"
                       
                   dead_guy = g
