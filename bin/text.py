@@ -276,7 +276,11 @@ battleText = {
 
   "pRestMax" : "%s rested, raising their WP to max.",
 
-  "pRest" : "%s rested, raising their WP by %d."
+  "pRest" : "%s rested, raising their WP by %d.",
+
+  "eRestMax" : "The enemy %s rested, raising their WP to max.",
+
+  "eRest" : "The enemy %s rested, raising their WP by %d.",
 
   "checkSelect" : """Which enemy would you like %s to investigate? Enter their ID.
             
@@ -291,6 +295,10 @@ battleText = {
 
   "pFleeSuccess" : "%s has fled!",
 
+  "eFleeFail" : "The enemy %s tried to flee, but was caught by %s!",
+
+  "eFleeSuccess" : "The enemy %s has fled!",
+
   "pSneak" : "%s used Sneak!",
 
   "attackFail" : "The attack failed!",
@@ -299,13 +307,38 @@ battleText = {
 
   "eStunned" : "The enemy %s is stunned and cannot move!",
 
+  "eStunRecover" : "The enemy %s recovered from being stunned!",
+
   "scar" : "%s gained a scar: %s!",
 
   "mateSpare" : "%s has defeated you, but chosen to spare you. The battle is over... you have lost.",
 
   "mateKill" : "%s has defeated you, and has chosen to finish you off!",
 
-  "factionSpare" : "The attackers have decided to spare %s! %s fled the battle scene."
+  "factionSpare" : "The attackers have decided to spare %s! %s fled the battle scene.",
+
+  "dying" : """Attention! %s is dying, but if you use %d herbs you may be able to save them. You have %d herbs total. Would you like to try and save them? Y/N
+                      
+               > """,
+
+"dyingSaved" : "You managed to save %s!",
+
+"eWaiting" : "The enemy %s is waiting...",
+
+"ePause" : "The enemy %s pauses to observe, increasing their stats slightly.",
+
+"predatorLoss" : "You have lost the battle against the %s!",
+
+"predatorWin" : "You have won the battle against the %s! They shall make a fine feast.",
+
+"factionLoss" : "Despite your best efforts, %s's battle squadron bested you. Your ego was badly shook by this loss, but soon you will surely rise again!",
+
+"factionWin" : "%s put up a good fight, but they were no match for your warriors. Good work!",
+  
+"loseLand" : "%s had to give up one piece of land as payment.",
+
+"winLand" : "%s gave you one piece of land as payment."
+  
 }
 
 ### MENU/MAIN
