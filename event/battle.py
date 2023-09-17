@@ -753,24 +753,21 @@ def battle(battle_type, battler):
                   if clan.clans["player_Clan"].herbs >= requirement:
                     cmd = "alfalfa"
                     while not cmd == "Y" and not cmd == "y" and not cmd == "N" and not cmd == "n":
-                      cmd = input("""
-                      Attention! %s is dying, but if you use %d herbs you may be able to save them. You have %d herbs total. Would you like to try and save them? Y/N
-                      
-                      > """ % (clan.clans["player_Clan"].cats[dead_guy].name, requirement, clan.clans["player_Clan"].herbs))
+                      cmd = input(battleText["dying"] % (clan.clans["player_Clan"].cats[dead_guy].name, requirement, clan.clans["player_Clan"].herbs))
                       if cmd == "Y" or cmd == "y":
                         clan.clans["player_Clan"].herbs -= requirement
                         odds = (random.randint(1, 3))
                         if odds == 1:
                           death(dead_guy, " of their wounds")
                         else:
-                          print("You managed to save %s!" % clan.clans["player_Clan"].cats[dead_guy].name)
+                          print(battleText["dyingSaved"] % clan.clans["player_Clan"].cats[dead_guy].name)
                           clan.clans["player_Clan"].cats[dead_guy].wp = 1
                       else:
                         death(dead_guy, " of their wounds")   
                   else:     
                     death(dead_guy, " of their wounds") 
           else:
-            print("The enemy %s is waiting..." % attackers[i].name)
+            print(battleText["eWaiting"] % attackers[i].name)
 
         # Rest
         
@@ -778,15 +775,15 @@ def battle(battle_type, battler):
           healed = (random.randint(1, 10))
           if attackers[i].wp + healed >= attackers[i].stats["Willpower"]:
             attackers[i].wp = attackers[i].stats["Willpower"]
-            print("The enemy %s rested, raising their WP to max." % attackers[i].name)
+            print(battleText["eRestMax"] % attackers[i].name)
           else:
             attackers[i].wp += healed
-            print("The enemy %s rested, raising their WP by %d." % (attackers[i].name, healed))
+            print(battleText["eRest"] % (attackers[i].name, healed))
 
         # Check
 
         elif choice == "c" and check_cool > 0:
-          print("The enemy %s pauses to observe, increasing their stats slightly." % attackers[i].name)
+          print(battleText["ePause"] % attackers[i].name)
           attackers[i].stats["Strength"] += 1
           attackers[i].stats["Toughness"] += 1
           attackers[i].stats["Speed"] += 1
@@ -798,9 +795,9 @@ def battle(battle_type, battler):
         else:
           catcher = (random.choice(list(fighters)))
           if fighters[catcher].stats["Speed"] > attackers[i].stats["Speed"]:
-            print("The enemy %s tried to flee, but was caught by %s!" % (attackers[i].name, fighters[catcher].name))
+            print(battleText["eFleeFail"] % (attackers[i].name, fighters[catcher].name))
           else:
-            print("The enemy %s has fled!" % attackers[i].name)
+            print(battleText["eFleeSuccess"] % attackers[i].name)
             if battle_type == "clan":
               clan.clans[battler].cats[i] = attackers[i].name
             del attackers[i]
@@ -808,7 +805,7 @@ def battle(battle_type, battler):
       if i in stunned:
         unstun = (random.randint(0, 1))
         if unstun == 1:
-          print("The enemy %s recovered from being stunned!" % attackers[i].name)
+          print(battleText["eStunRecover"] % attackers[i].name)
           del stunned[i]
 
       if len(list(fighters)) == 0 and len(list(sneaking)) == 0 and len(list(charging)) == 0:
@@ -832,12 +829,12 @@ def battle(battle_type, battler):
   
   if winner == "enemy":
     if battle_type == "predator":
-      print("You have lost the battle against the %s!" % predator_type)
+      print(battleText["predatorLoss"] % predator_type)
     elif battle_type == "clan":
-      print("Despite your best efforts, %s's battle squadron bested you. Your ego was badly shook by this loss, but soon you will surely rise again!" % clan.clans[battler].name)
+      print(battleText["factionLoss"] % clan.clans[battler].name)
       claimed = claim(battler)
       if claimed == True and (len(clan.clans["player_Clan"].coordinates) > 0):
-        print("%s had to give up one piece of land as payment." % clan.clans["player_Clan"].name)
+        print(battleText["loseLand"] % clan.clans["player_Clan"].name)
         clan.clans[battler].land += 1
         tradeland = (random.choice(clan.clans["player_Clan"].location))
         for n in land.coordinates:
@@ -852,13 +849,13 @@ def battle(battle_type, battler):
 
   elif winner == "player":
     if battle_type == "predator":
-      print("You have won the battle against the %s! They shall make a fine feast." % predator_type)
+      print(battleText["predatorWin"] % predator_type)
       clan.clans["player_Clan"].prey += 25
     elif battle_type == "clan":
-      print("%s put up a good fight, but they were no match for your warriors. Good work!" % clan.clans[battler].name)    
+      print(battleText["factionWin"] % clan.clans[battler].name)    
       claimed = claim("player_Clan")
       if claimed == True and (len(clan.clans[battler].coordinates) > 0):
-        print("%s gave you one piece of land as payment." % clan.clans[battler].name)
+        print(battleText["winLand"] % clan.clans[battler].name)
         clan.clans["player_Clan"].land += 1
         tradeland = (random.choice(clan.clans[battler].location))
         for n in land.coordinates:
