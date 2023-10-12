@@ -341,6 +341,30 @@ battleText = {
   
 }
 
+# EVENT/DEATH
+
+deathText = {
+  "kiwi" : " from an unexpected indent to the neck",
+
+  "death" : "%s has died%s. They will be missed.",
+
+  "lifeLoss" : "%s has lost a life! They have %d lives left.",
+
+  "newLeader" : "The new leader is %s, now %s.",
+
+  "lives" : """===CUTSCENE===
+      
+      The first task of a new leader is receiving their nine lives.
+      
+      At the %s, you gain the following lives: 
+      
+      """,
+
+  "lifeRandom" : "From %s, your %s, the gift of %s.",
+
+  "lifeChar" : "From %s the %s, the gift of %s.",
+}
+
 ### MENU/MAIN
 
 mainText = {
