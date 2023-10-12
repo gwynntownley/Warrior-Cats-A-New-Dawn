@@ -1,6 +1,8 @@
 import random
 import sys
 
+from bin.text import deathText
+
 from entity.clan import clan
 from entity.cat import cat
 
@@ -22,16 +24,16 @@ def death(dead_guy, cause):
   # Start
 
   if clan.clans["player_Clan"].cats[dead_guy].root == "Kiwi":
-    cause = " from an unexpected indent to the neck"
+    cause = deathText["kiwi"]
   
-  print("%s has died%s. They will be missed." % (clan.clans["player_Clan"].cats[dead_guy].name, cause))
+  print(deathText["death"] % (clan.clans["player_Clan"].cats[dead_guy].name, cause))
 
   # Player lifeloss
   
   if hasattr(clan.clans["player_Clan"].cats[dead_guy], "lives"):
     if clan.clans["player_Clan"].cats[dead_guy].lives > 1:
       clan.clans["player_Clan"].cats[dead_guy].lives -= 1
-      print("%s has lost a life! They have %d lives left." % (clan.clans["player_Clan"].cats[dead_guy].name, clan.clans["player_Clan"].cats[dead_guy].lives))
+      print(deathText["lifeLoss"] % (clan.clans["player_Clan"].cats[dead_guy].name, clan.clans["player_Clan"].cats[dead_guy].lives))
       clan.clans["player_Clan"].cats[dead_guy].wp = 5
     
   else:
@@ -44,7 +46,7 @@ def death(dead_guy, cause):
         if clan.clans["player_Clan"].cats[i].rank["canInherit"] == True:
           new_leader = i
           break
-      print("The new leader is %s, now %s." % (clan.clans["player_Clan"].cats[new_leader].name,
+      print(deathText["newLeader"] % (clan.clans["player_Clan"].cats[new_leader].name,
                                                clan.clans["player_Clan"].cats[new_leader].root + "star"))
       clan.clans["player_Clan"].cats[new_leader].suffix = "star"
       clan.clans["player_Clan"].cats[new_leader].name = clan.clans["player_Clan"].cats[new_leader].root + clan.clans["player_Clan"].cats[new_leader].suffix 
@@ -53,13 +55,7 @@ def death(dead_guy, cause):
 
       # Nine lives ceremony
       
-      print("""===CUTSCENE===
-      
-      The first task of a new leader is receiving their nine lives.
-      
-      At the %s, you gain the following lives: 
-      
-      """ % land.communer)
+      print(deathText["lives"] % land.communer)
 
       temp_starclan = folder.folders["starclan"].contents
 
@@ -75,12 +71,12 @@ def death(dead_guy, cause):
           relation = (random.choice(cat.relationship))
 
           if "paw" in name or "kit" in name:
-            while relation == "mate" or relation == "mother" or relation == "father" or relation == "parent":
+            while relation in ["mate","mother","father","parent":
               relation = (random.choice(cat.relationship))  
 
           virtue = (random.choice(cat.virtues))
 
-          print("From %s, your %s, the gift of %s." % (name, relation, virtue))
+          print(deathText["lifeRandom"] % (name, relation, virtue))
         else:
           giver = (random.choice(list(folder.folders["starclan"].contents)))
           name = folder.folders["starclan"].contents[giver].name
@@ -89,7 +85,7 @@ def death(dead_guy, cause):
 
           virtue = (random.choice(cat.virtues))
 
-          print("From %s the %s, the gift of %s." % (name, rank, virtue))
+          print(deathText["lifeChar"] % (name, rank, virtue))
 
           del temp_starclan[giver]
         
