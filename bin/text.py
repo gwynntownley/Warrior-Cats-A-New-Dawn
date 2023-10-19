@@ -363,6 +363,24 @@ deathText = {
   "lifeRandom" : "From %s, your %s, the gift of %s.",
 
   "lifeChar" : "From %s the %s, the gift of %s.",
+
+  "end" : """There are no cats eligible for the deputy position! 
+  As your Clan cannot function without a deputy or warriors to hunt or defend for it...
+  Your Clan has disbanded.
+  ...
+  Restart the program to try again!""",
+
+  "selDeputy" : """Who would you like to promote? Please enter the cat's ID.
+
+            > """,
+
+  "newDeputy" : "The new deputy is %s.",
+
+  "darkForest" : "%s has been banished to the Dark Forest ... ",
+
+  "ghostRealm" : "%s's soul cannot pass on , so they are trapped in the Ghost Realm ...",
+
+  "starClan" : "%s has joined the ranks of StarClan!"
 }
 
 ### MENU/MAIN
