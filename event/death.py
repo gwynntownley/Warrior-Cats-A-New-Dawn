@@ -100,11 +100,7 @@ def death(dead_guy, cause):
           id += 1
           choices.append(i)
       if id == 1:
-        print("There are no cats eligible for the deputy position!")
-        print("As your Clan cannot function without a deputy or warriors to hunt or defend for it...")
-        print("Your Clan has disbanded.")
-        print("...")
-        print("Reload to start again!")
+        printprint(deathText["end"])
         sys.exit(0)
       else:
         conf = False
@@ -115,10 +111,8 @@ def death(dead_guy, cause):
             clan.clans["player_Clan"].cats[new_deputy].rank = "deputy"
             conf = True
           except:
-            cmd = input("""Who would you like to promote? Please enter the cat's ID.
-
-            > """)
-      print("The new deputy is %s." % clan.clans["player_Clan"].cats[new_deputy].name)
+            cmd = input(deathText["selDeputy"])
+      print(deathText["newDeputy"] % clan.clans["player_Clan"].cats[new_deputy].name)
       for i in clan.clans["player_Clan"].cats.copy():
         clan.clans["player_Clan"].cats[i].rep = (random.randint(-10, 10))
     # Process death
@@ -130,18 +124,18 @@ def death(dead_guy, cause):
       print("%s has joined the ranks of StarClan !" % clan.clans["player_Clan"].cats[dead_guy].name)
     elif clan.clans["player_Clan"].cats[dead_guy].allegiance == "The Dark Forest":
       realm.realms["dark"].cats[dead_guy] = clan.clans["player_Clan"].cats[dead_guy]
-      print("%s has been banished to the Dark Forest ... " % clan.clans["player_Clan"].cats[dead_guy].name)
+      print( % clan.clans["player_Clan"].cats[dead_guy].name)
     else:
       rando = (random.randint(1, 6))
       if rando == 1:
         realm.realms["dark"].cats[dead_guy] = clan.clans["player_Clan"].cats[dead_guy]
-        print("%s has been banished to the Dark Forest ... " % clan.clans["player_Clan"].cats[dead_guy].name)
+        print(deathText["darkForest"] % clan.clans["player_Clan"].cats[dead_guy].name)
       elif rando == 2:
         realm.realms["ghost"].cats[dead_guy] = clan.clans["player_Clan"].cats[dead_guy]
-        print("%s's soul cannot pass on , so they are trapped in the Ghost Realm ..." % clan.clans["player_Clan"].cats[dead_guy].name)
+        print(deathText["ghostRealm"] % clan.clans["player_Clan"].cats[dead_guy].name)
       else:
         realm.realms["star"].cats[dead_guy] = clan.clans["player_Clan"].cats[dead_guy]
-        print("%s has joined the ranks of StarClan !" % clan.clans["player_Clan"].cats[dead_guy].name)
+        print(deathText["starClan"] % clan.clans["player_Clan"].cats[dead_guy].name)
 
     del clan.clans["player_Clan"].cats[dead_guy]
 
