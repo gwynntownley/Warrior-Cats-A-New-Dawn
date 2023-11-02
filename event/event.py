@@ -1,3 +1,4 @@
+from bin.text import eventText
 import random
 
 
@@ -99,10 +100,10 @@ def random_event(c):
   # bonus prey
   
   if rando == "bonus prey":
-    print("The prey was running well in %s." % clan.clans[c].name)
+    print(eventText["bonusPrey"] % clan.clans[c].name)
     if clan.clans[c] == clan.clans["player_Clan"]:
       plus_prey = abs(clan.clans["player_Clan"].prey * (random.uniform(0.25, 0.75)))
-      print("They gained %d extra feedings." % plus_prey)
+      print(eventText["preyGain"] % plus_prey)
       clan.clans[c].prey += plus_prey
     else:
       clan.clans[c].power += 1
@@ -110,11 +111,11 @@ def random_event(c):
   # minus prey
   
   elif rando == "minus prey":
-    print("There was a severe prey famine in %s." % clan.clans[c].name)
+    print(eventText["minusPrey"] % clan.clans[c].name)
     if clan.clans[c] == clan.clans["player_Clan"]:
       
       minus_prey = abs(clan.clans["player_Clan"].prey * (random.uniform(0.25, 0.75)))
-      print("They lost %d feedings." % minus_prey)
+      print(eventText["preyLoss"] % minus_prey)
       clan.clans[c].prey -= minus_prey
     else:
       clan.clans[c].power -= 1
