@@ -121,7 +121,7 @@ def death(dead_guy, cause):
 
     if clan.clans["player_Clan"].cats[dead_guy].allegiance == "StarClan":
       realm.realms["star"].cats[dead_guy] = clan.clans["player_Clan"].cats[dead_guy]
-      print("%s has joined the ranks of StarClan !" % clan.clans["player_Clan"].cats[dead_guy].name)
+      print(deathText["starClan"] % clan.clans["player_Clan"].cats[dead_guy].name)
     elif clan.clans["player_Clan"].cats[dead_guy].allegiance == "The Dark Forest":
       realm.realms["dark"].cats[dead_guy] = clan.clans["player_Clan"].cats[dead_guy]
       print( % clan.clans["player_Clan"].cats[dead_guy].name)
