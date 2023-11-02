@@ -383,6 +383,18 @@ deathText = {
   "starClan" : "%s has joined the ranks of StarClan!"
 }
 
+### EVENT/EVENT
+
+eventText = {
+  "bonusPrey" : "The prey was running well in %s.",
+  
+  "preyGain" : "They gained %d extra feedings.",
+  
+  "minusPrey" : "There was a severe prey famine in %s.",
+  
+  "preyLoss" : "They lost %d feedings."
+}
+
 ### MENU/MAIN
 
 mainText = {
