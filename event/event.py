@@ -145,16 +145,16 @@ def random_event(c):
       level = (random.randint(1, 5))
       count = (random.randint(1, 5))
       fox_power = level
-      print("It seems %d lvl. %d %s were found on %s's territory." % (count, level, predator, clan.clans[c].name))
+      print(eventText["otherPred"] % (count, level, predator, clan.clans[c].name))
       patrol_power = clan.clans[c].power
       if patrol_power >= fox_power:
-        print("%s managed to defeat the %s. They will make a fine feast." % (clan.clans[c].name, predator))
+        print(eventText["otherPredWin"] % (clan.clans[c].name, predator))
         if clan.clans[c] == clan.clans["player_Clan"]:
           clan.clans["player_Clan"].prey += fox_power
         else:
           clan.clans[c].power += 1
       else:
-        print("%s was not able to control the %s and they attacked the camp." % (clan.clans[c].name, predator))
+        print(eventText["otherPredLose"] % (clan.clans[c].name, predator))
         clan.clans[c].power -= 1
         rando = (random.randint(1, 3))
         for i in range(rando):
@@ -171,7 +171,7 @@ def random_event(c):
         attacker = random.choice(list(clan.clans))
       rando = (random.randint(1, 2))
       if (clan.clans[attacker].rep <= 0 and c == "player_Clan") or rando == 1:
-        print("%s has been attacked by %s!" % (clan.clans[c].name, clan.clans[attacker].name))
+        print(eventText["clanFight"] % (clan.clans[c].name, clan.clans[attacker].name))
         if clan == "player_Clan":
           battle("clan", attacker)
         else:
@@ -196,7 +196,7 @@ def random_event(c):
           if win == True:
             claimed = claimer(c)
             if claimed == True and (len(clan.clans[attacker].coordinates) > 0):
-              print("%s won! %s gave one piece of land as payment." % (clan.clans[c].name, clan.clans[attacker].name))
+              print(eventText["clanFightResult"] % (clan.clans[c].name, clan.clans[attacker].name))
               clan.clans[c].land += 1
               random_y = (random.choice(list(clan.clans[attacker].coordinates)))
               clan.clans[attacker].coordinates[random_y].remove(random.choice(clan.clans[attacker].coordinates[random_y]))
@@ -206,7 +206,7 @@ def random_event(c):
           else:
             claimed = claimer(attacker)
             if claimed == True and (len(clan.clans[c].coordinates) > 0):
-              print("%s won! %s gave one piece of land as payment." % (clan.clans[attacker].name, clan.clans[c].name))
+              print(eventText["clanFightResult"] % (clan.clans[attacker].name, clan.clans[c].name))
               clan.clans[attacker].land += 1
               random_y = (random.choice(list(clan.clans[c].coordinates)))
               clan.clans[c].coordinates[random_y].remove(random.choice(clan.clans[c].coordinates[random_y]))
