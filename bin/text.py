@@ -392,7 +392,17 @@ eventText = {
   
   "minusPrey" : "There was a severe prey famine in %s.",
   
-  "preyLoss" : "They lost %d feedings."
+  "preyLoss" : "They lost %d feedings.",
+
+  "otherPred" : "It seems %d lvl. %d %s were found on %s's territory.",
+
+  "otherPredWin" : "%s managed to defeat the %s. They will make a fine feast.",
+
+  "otherPredLose" : "%s was not able to control the %s and they attacked the camp.",
+
+  "clanFight" : "%s has been attacked by %s!",
+
+  "clanFightResult" : "%s won! %s gave one piece of land as payment.",
 }
 
 ### MENU/MAIN
